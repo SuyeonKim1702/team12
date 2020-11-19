@@ -1,2 +1,2 @@
 #### team12
-Repository for class opensource platform.
+Repository for class open software platform.
