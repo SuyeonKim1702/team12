@@ -1,6 +1,8 @@
 
 /* 레이아웃 */
-
+/* table, tr, td{
+  border: 1px solid;
+} */
 .column{
   width: 100px;
   height: 100;
@@ -9,10 +11,13 @@
 }
 .category{
   margin-right: 20px;
+  position: relative;
+  left: 5px;
 }
-
 #starrate{
-  margin-right: 55px;
+  margin-right: 60px;
+  top: -7px;
+  left: 10px;
 }
 
 /* 태그 선택 기능*/
@@ -32,9 +37,9 @@
 
 /* CHECKED STYLES */
 [type=radio]:checked + img {
-  outline: 2px solid #106BFF;
+  border: 2px solid #106BFF;
 }
-
+/* chech되면 버튼 색깔 변경 되면 좋겠는데 js or php로 할지 모르겠다.*/
 
 
 /* 별점 기능 */
@@ -83,7 +88,6 @@
 }
 .rating .rate_radio:checked + label {
     background-color: #FECF0F;
-
 }
 
 .warning_msg {

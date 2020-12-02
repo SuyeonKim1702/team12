@@ -1,0 +1,52 @@
+.wrap{
+    max-width: 600px;
+    margin: 0 auto; /* 화면 가운데로 */
+    background-color: #fff;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+#write_review{
+  border: 0;
+  background-color: white;
+  position: relative;
+  top: 5px;
+  left: 20px;
+}
+
+
+
+table{
+  width: 100%;
+  /* border-top:1px solid #444444; */
+  border-collapse: collapse;
+}
+td{
+  border-bottom: 1px solid #444444;
+  /* padding: 10px; */
+}
+
+.tag_result{
+  position: relative;
+  left: 50px;
+  margin-right: 10px;
+}
+.upload_time{
+  /* position: relative;
+  top: -10px; */
+  color: gray;
+}
+.rating_result{
+  color: #FECF0F;
+}
+.review_result{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.user_img{
+  display:block;
+  margin: 10px auto;
+}
