@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 - KAGONG</title>
+    <link rel="stylesheet" href="loginStyle.css" type="text/css">
+    <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        function sign_in(){
+
+            var check_id = /^[a-zA-Z0-9]{5,20}$/     //아이디 검사 정규식
+            var check_pw = /^[a-zA-Z0-9]{8,15}$/     //비밀번호 검사 정규식
+
+
+            var id = document.getElementById("ID");
+            var pw = document.getElementById("pw");
+
+            if(document.join.ID.value==""){
+                alert("ID를 입력하세요.");
+                document.join.ID.value="";
+                document.id.focus();
+                return false;
+
+            }
+            if(!check(check_id,id,"아이디는 5~20자의 영어 대소문자/숫자로 입력하세요")){
+                return false;
+            }
+            if(!check(check_pw,pw,"비밀번호는 8~15자의 영어 대소문자/숫자로 입력하세요")){
+                return false;
+            }
+
+            if(document.join.pw2.value !== document.join.pw2.value){
+                alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+                document.join.pw2.value="";
+                document.pw2.focus();
+                return false;
+            }
+
+            if(document.join.nickname.value === "") {
+                alert("이름을 입력해 주세요");
+                document.join.nickname.value.focus();
+                return false;
+            }
+
+
+
+            function check(re,what,message){
+                if(re.join(what.value)){
+                    return true;
+                }
+                alert(message);
+                what.value ="";
+                what.focus(); //return false;
+            }
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+    <div class = "main-container">
+        <div class="main-wrap">
+            <header>
+                <div class="logo">
+                    <i class="fas fa-coffee"></i>
+                    <a href="index.html">KAGONG</a>
+                </div>
+                <form name="join" onsubmit="sign_in()" action="" method="post">
+                    <section class="signin-input-section-wrap">
+                        <div class="sign-input-wrap">
+                            <p>닉네임</p>
+                            <input placeholder="닉네임" name = "nickname" id="nickname" type="text" maxlength="10" value="">
+                        </div>
+                        <div class="sign-input-wrap">
+                            <p>아이디</p>
+                            <input placeholder="아이디" id="ID" type="text" maxlength="20" value="">
+                            <p class="condition">*영어 대소문자/숫자로 5~20자</p>
+                        </div>
+                        <div class="sign-input-wrap password-input-wrap">
+                            <p>비밀번호</p>
+                            <input placeholder="비밀번호" name="pw" id="pw" type="password" maxlength="15">
+                            <p class="condition">*영어 대소문자/숫자로 8~15자</p>
+                        </div>
+                        <div class="sign-input-wrap password-input-wrap">
+                            <p>비밀번호 확인</p>
+                            <input placeholder="비밀번호 재입력" name="pw2" id="pw2" type="password" maxlength="15">
+                        </div>
+                        <div class="sign-button-wrap">
+                            <button type="submit">회원 가입</button>
+                        </div>
+                        <div class="click">
+                            <a href="index.html" style="margin-right:10px;">홈으로 돌아가기</a>
+                            <a href="login.html">로그인 하기</a>
+                        </div>
+                    </section>
+                </form>
+            </header>
+        </div>
+    </div>
+</body>
+</html>
