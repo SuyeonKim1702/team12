@@ -11,6 +11,95 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 <?php
+
+$seat = [
+  1 => "좌석 적은",
+  2 => "좌석 적당",
+  3 => "좌석 많은",
+];
+
+$mood = [
+  1 => "소란스러운",
+  2 => "무난한 소음",
+  3 => "조용한",
+];
+
+$cost = [
+  1 => "가격 비싼",
+  2 => "가격 보통",
+  3 => "저렴한",
+];
+
+
+#db 연결 부분 
+$conn = mysqli_connect(
+  '15.165.124.76',
+  'osp',
+  '1234',
+  'cagong');
+
+
+
+#작성한 리뷰 post 하는 부분    
+$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
+VALUES
+('$reviewContent', $userIdx, $cafeIdx, $price, $mood, $seat, $totalRating);";
+
+# if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
+
+
+#작성한 리뷰 수정하는 부분
+$modified_review = "UPDATE review
+SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+WHERE reviewIdx = {$reviewIdx};";
+
+# if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
+
+          
+#작성한 리뷰 삭제하는 부분 
+
+$deleted_review = "DELETE FROM review WHERE reviewIdx = {$reviewIdx};";
+ # if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
+
+
+
+
+#리뷰 개수 가져오는 부분 c.cafeIdx는 카페인덱스마다 바뀌어야 함
+$sql1="SELECT count(*) as count
+from review
+join cafe c on review.cafeIdx = c.cafeIdx
+where c.cafeIdx=2;";
+
+
+
+
+#리뷰 리스트 가져오는 부분 c.cafeIdx는 카페인덱스마다 바뀌어야 함
+  $sql2 = "SELECT reviewIdx, reviewContent,nickname, price, mood, seat, totalRating,CASE
+  WHEN TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()) <= 0 THEN '방금 전'
+  WHEN TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()) < 60 THEN CONCAT(TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()), '분 전')
+  WHEN TIMESTAMPDIFF(HOUR, review.createdAt, NOW()) < 24 THEN CONCAT(TIMESTAMPDIFF(HOUR, review.createdAt, NOW()), '시간 전')
+  WHEN TIMESTAMPDIFF(DAY, review.createdAt, NOW()) < 30 THEN CONCAT(TIMESTAMPDIFF(DAY, review.createdAt, NOW()), '일 전')
+  ELSE CONCAT(TIMESTAMPDIFF(MONTH, review.createdAt, NOW()), '달 전')
+END AS createdAt
+FROM review
+join cafe c on review.cafeIdx = c.cafeIdx
+join user u on review.userIdx = u.userIdx
+where c.cafeIdx = 2;";
+
+  $result = mysqli_query($conn, $sql2);
+
+  $cnt = mysqli_query($conn, $sql1);
+
+
+  
+
+
+
+
+#예전 코드                
 $review_number = 3;
 $user_name = array("공시생", "mina98", "먹짱123");
 $user_image = array("images/사용자이미지2.png", "images/사용자이미지1.png", "images/사용자이미지1.png");
@@ -67,30 +156,54 @@ $count=$review_number;
         <div class="bottom-container">
           <h1>Review List</h1>
           <h2>
-            <?php echo $review_number."건의 방문자 평가";?>
+          <?php echo mysqli_fetch_assoc($cnt)['count']."건의 방문자 평가";?>
             <button type="button" id="write_review" type="submit"><img id="write_review_btn" src="images/리뷰쓰기.png" width=90 height=30></button>
           </h2>
 
           <table class="review_list" width=600>
           <?php
-              while(--$count>=0){
-                print "<tr class='review'>";
-                  print "<td width=120>";
-                    print "<image class='user_img' src='".$user_image[$count]."' width=100 height=100>";
-                    print "<p style='text-align:center;'>".$user_name[$count]."</p>";
-                  print "</td>";
-                  print "<td class='review_result'>";
-                    print "<p class='upload_time'>".$upload_time[$count]."</p>";
-                    print "<p class='rating_result'>";
-                      print "<font size=7>".$score[$count]."</font>";
-                      for($i=0; $i<3; $i++){
-                        print "<img class='tag_result' src='".$selectedtags[$count][$i]."' height=30>";
-                      }
-                    print "</p>";
-                    print "<p class='comment'>".$comment[$count]."</p>";
-                  print "</td>";
-                print "</tr>";
-              }
+
+
+$review_list_html ="";
+while($row1 = mysqli_fetch_assoc($result)){
+
+  
+
+
+$review_number = count($row1);
+$user_name = $row1['nickname'];
+$user_image = "images/사용자이미지2.png";
+$upload_time = $row1['createdAt'];
+$score =$row1['totalRating'];
+$comment = $row1['reviewContent'];
+
+$review_list_html = $review_list_html."<tr class='review'> <td width=120>
+<image class='user_img' src='".$user_image."' width=100 height=100>
+ <p style='text-align:center;'>".$user_name."</p>
+ </td> <td class='review_result'>
+ <p class='upload_time'>".$upload_time."</p>
+ <p class='rating_result'>
+   <font size=7>".$score."</font>
+   <div>
+   <div class='tag_result'>".$seat[$row1["seat"]]."</div>
+   <div class='tag_result'>".$mood[$row1["mood"]]."</div>
+   <div class='tag_result'>".$cost[$row1["price"]]."</div>
+   </div>
+</p>
+<p class='comment'>".$comment."</p></td></tr>";
+
+
+
+
+   
+  }
+ 
+ mysqli_close($conn);
+
+ echo $review_list_html;
+
+
+
           ?>
           </table>
         </div>
