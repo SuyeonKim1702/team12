@@ -8,30 +8,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     <script type = "text/javascript">
     function log_in(){
-        var len = document.login.pw.value.length;
-        if(document.login.id.value==""){
-            alert("ID를 입력하세요.");
-            document.login.id.value="";
-            document.id.focus();
-            return false;
+        var password = document.getElementById("pw").value;
+        var len = password.length;
+        if(document.login.email.value==""){
+            alert("이메일을 입력하세요.");
 
         }
         else if(document.login.pw.value==""){
-            alert("패스워드를 입력하세요.");
-            document.login.pw.value="";
-            document.pw.focus();
-            return false;
-
+            alert("비밀번호를 입력하세요.");
         }
         else if(len<8 || len>15){
-            alert("8자 이상 15자 이하로 입력해주세요.");
-            document.login.pw.value="";
-            document.pw.focus();
-            return false;
+            alert("비밀번호를 8자 이상 15자 이하로 입력해 주세요.");
 
         }
         else {
-            document.login.submit();
+            window.location.href="index.html";  //성공시 홈화면으로 이동
         }
     }
 
@@ -46,13 +37,13 @@
                 <a href="index.html">KAGONG</a>
             </div>
         </header>
-        <form name="login" onsubmit="log_in()" action="" method = "post">
+        <form name="login" onsubmit="log_in(); return false" action="" method = "post">
             <section class="login-input-section-wrap">
                 <div class="login-input-wrap">
-                    <input placeholder="아이디" name="id" type="text" maxlength="20"></input>
+                    <input placeholder="이메일" name="email" id="email" type="email" maxlength="30" value=""></input>
                 </div>
                 <div class="login-input-wrap password-wrap">
-                    <input placeholder="비밀번호" name="pw" type="password" maxlength="15"></input>
+                    <input placeholder="비밀번호" name="pw" id="pw" type="password" maxlength="15" value=""></input>
                 </div>
                 <div class="login-button-wrap">
                     <button type="submit">로그인</button>
