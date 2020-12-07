@@ -66,8 +66,9 @@ if($_POST != null){
      $star_rate = $max;
   }
 
-  // $id = session_id(); //사용자 id
-  $new_user_name = "새 이용자"; //
+  // 로그인된 사용자로 설정하기
+  $id = session_id(); // 사용자 id
+  $new_user_name = "사용자 이름"; //
   $new_user_image = "images/사용자이미지1.png";
 
   // array_push로 새로운 리뷰 데이터 베열에 넣기
@@ -141,7 +142,18 @@ $count=$review_number;
                     print "<p style='text-align:center;'>".$user_name[$count]."</p>";
                   print "</td>";
                   print "<td class='review_result'>";
-                    print "<p class='upload_time'>".$upload_time[$count]."</p>";
+                    print "<p>";
+                    print "<span class='upload_time'>".$upload_time[$count]."</span>";
+                    // if($id == session_id){ //사용자의 리뷰이면 삭제 버튼 생성
+                      print "<span class='manage' style='float: right'>";
+
+                      print "<span class='edit' style='margin-right:10px'><a href='write_review.php'><i class='fas fa-edit'></i></a></span>";
+                      print "<span class='delete'><i class='fas fa-trash-alt'></i></span>";
+                      // 삭제 및 수정 기능 구현하기
+
+                      print "</span>";
+                    // }
+                    print "</p>";
                     print "<p class='rating_result'>";
                       print "<i class='fas fa-star' style='font-size:1.75em'></i>";
                       print "<font size=7>".$score[$count]."</font>"."<font size=6>".".0"."</font>";
