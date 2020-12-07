@@ -13,7 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 <?php
-$cafe_name ="카페 비엔";
+session_start();
+$cafe_name = "카페 비엔";
 ?>
 
 </head>
@@ -37,7 +38,7 @@ $cafe_name ="카페 비엔";
                         <li><a href="">회원가입</a></li>
                     </ul>
                 </nav>
-                <div class="main-content" >
+                <div class="main-content">
                     <div class="title">
                         <h1>카공족을 위한</h1>
                         <h1>맞춤 카페 추천서비스</h1>
@@ -50,100 +51,117 @@ $cafe_name ="카페 비엔";
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <li><a href="/">검색 결과</a></li>
-                    <li><a href="/">카페 정보</a></li>
-                    <li><a href="/">리뷰 목록</a></li>
+                    <a href="/">검색 결과</a>
+                    <a href="/">카페 정보</a>
+                    <a href="/">리뷰 목록</a>
                 </nav>
             </div>
         </div>
 
         <div class="bottom-container">
-          <h1>Review</h1>
-          <form name="reviewform" class="reviewform" method="post" action="write_review.js">
-            <input type="hidden" name="rate" id="rate" value="0"/>
+
+          <form name="reviewform" class="reviewform" method="post" action="review_list.php">
+            <br><br>
             <h3>
               <?php
                 echo "<font color=#ff9900>".$cafe_name."</font>"."에 대한 솔직한 리뷰를 작성해주세요.";
               ?>
             </h3>
+            <br>
+
             <table class="review_tags">
               <tr><div id="review_tag1">
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
-                    <input type="radio" name="price" value="cheap">
+                    <input type="radio" name="price" id="cheap" value="/tags/가격저렴.png">
                     <img src="/tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" value="reasonable">
+                    <input type="radio" name="price" id="reasonable" value="/tags/가격적당.png" checked>
                     <img src="/tags/보통.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" value="expensive">
+                    <input type="radio" name="price" id="expensive" value="/tags/가격비쌈.png">
                     <img src="/tags/비싸다.png" height=30>
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
-                  <input type="radio" name="mood" value="quiet">
+                  <input type="radio" name="mood" id="quiet" value="/tags/조용한.png">
                   <img src="/tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" value="normal">
+                  <input type="radio" name="mood" id="normal" value="/tags/적당한.png" checked>
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" value="noisy">
+                  <input type="radio" name="mood" id"noisy" value="/tags/소란스러운.png">
                   <img src="/tags/소란스럽다.png" height=30>
                 </label></td>
-              </div><tr>
+              </div></tr>
               <tr><div id="review_tag3">
                 <td><label class="category" for="seat">좌석 갯수</label></td>
                 <td><label class="column">
-                  <input type="radio" name="seat" value="few">
+                  <input type="radio" name="seat" id="few" value="/tags/붐비는.png">
                   <img src="/tags/적다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" value="average">
+                  <input type="radio" name="seat" id="average" value="/tags/좌석보통.png" checked>
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" value="many">
+                  <input type="radio" name="seat" id="many" value="/tags/좌석많은.png">
                   <img src="/tags/많다.png" height=30>
                 </label></td>
               </div></tr>
             </table>
 
+
             <div class="review_rating">
                 <div class="warning_msg">별점을 선택해 주세요.</div>
                 <div class="rating">
                     <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+
                     <label  id="starrate" class="category" for="rating">별점</label>
-                    <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+                    <input type="hidden" name="rate" id="rate" value="0"/>
+                    <input type="checkbox" name="rating[]" id="rating1" value="1" class="rate_radio" title="1점">
                     <label for="rating1"></label>
-                    <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
+                    <input type="checkbox" name="rating[]" id="rating2" value="2" class="rate_radio" title="2점">
                     <label for="rating2"></label>
-                    <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
+                    <input type="checkbox" name="rating[]" id="rating3" value="3" class="rate_radio" title="3점" >
                     <label for="rating3"></label>
-                    <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
+                    <input type="checkbox" name="rating[]" id="rating4" value="4" class="rate_radio" title="4점">
                     <label for="rating4"></label>
-                    <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+                    <input type="checkbox" name="rating[]" id="rating5" value="5" class="rate_radio" title="5점">
                     <label for="rating5"></label>
                 </div>
             </div>
-            <div class="review_contents">
+
+            <br>
+
+            <div class="review_contents" name="comment">
                 <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
                 <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"></textarea></p>
             </div>
+
+            <?php
+
+            $upload_time = new DateTime();        //현재시간의 정보를 $upload_time 변수에 저장
+            $_SESSION['upload_time'] = $upload_time;
+            ?>
+
             <div class="cmd">
               <div class="btn_wrap">
-                <input class="button" type="button" name="save" id="save" value="등록">
+                <input class="button" type="submit" name="save" id="save" value="등록">
               </div>
               <div class="btn_wrap">
-                <input class="button" type="button" name="cancel" id="cancel" value="취소">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소">
               </div>
+
                 <!-- 취소 기능 아직 안함 -->
             </div>
+
           </form>
         </div>
     </main>

@@ -6,7 +6,6 @@
   display: inline-block;
   margin-left: 20px;
   position: relative;
-
   /* align-items: center;
   justify-content: center; */
 
@@ -44,4 +43,9 @@
   position: relative;
   /* align-items: center;
   justify-content: center; */
+}
+.cmd .btn_wrap .button{
+  position: relative;
+  left: 320px;
+  /* z-index: 2; */
 }

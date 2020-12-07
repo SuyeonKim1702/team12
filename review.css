@@ -9,8 +9,6 @@
     box-sizing: border-box;
 
 }
-
-
 /* show_review */
 
 
@@ -18,23 +16,27 @@
 .nav_cafe{
   background: #282828;
   width: 100%;
-  display: flex;
+  /* display: flex; */
   justify-content: space-around;
-  align-items: center;
+  text-align: left;
+
+  margin:0;
+  padding:0;
   height: 30px;
+
   position: absolute;
   top: 450px;
+
 }
-
-
 
 .nav_cafe a {
   font-size:16px;
   color: #ffffff;
   text-decoration: none;
   position: relative;
+  display: inline-block;
+  padding: 6px 10px;
 
-  padding: 6px 12px;
 }
 .nav_cafe a::after{
   content: "";
@@ -43,7 +45,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 0;
-  height: 4px;
+  height: 6px;
   background-color: #f1c40f;
   transition: all .5s ease-out;
 }
@@ -145,7 +147,12 @@ form.main-searchbox button{
 /* table, tr, td{
   border: 1px solid;
 } */
-
+.review_tags table{
+  height: 200px;
+}
+.review_tags tr{
+  height: 50px;
+}
 .column{
   width: 100px;
   height: 100;
@@ -159,7 +166,7 @@ form.main-searchbox button{
 }
 
 #starrate{
-  margin-right: 60px;
+  margin-right: 70px;
   top: -7px;
   left: 10px;
 }
@@ -211,8 +218,8 @@ form.main-searchbox button{
     display: inline-block;
     z-index: 20;
     opacity: 0.001;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-color: #fff;
     cursor: pointer;
     vertical-align: top;
@@ -224,11 +231,11 @@ form.main-searchbox button{
     display: inline-block;
     margin-left: -4px;
     z-index: 10;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-image: url('./images/starrate.png');
     background-repeat: no-repeat;
-    background-size: 30px 30px;
+    background-size: 35px 35px;
     cursor: pointer;
     background-color: #f0f0f0;
 
@@ -252,11 +259,15 @@ form.main-searchbox button{
 
 /*------- review_list -----------*/
 #write_review{
-  border: 0;
-  background-color: white;
+  /* background-color: #6699CC;
+  color: #ffffff; 파란색 */
+  background-color: #ff9900;
+  color: #ffffff;
+/* background-color: #cccccc; 그래에*/
+
+
   position: relative;
-  top: 5px;
-  left: 20px;
+  left: 10px;
 }
 
 .review_list table{
@@ -293,4 +304,7 @@ form.main-searchbox button{
 .user_img{
   display:block;
   margin: 10px auto;
+}
+.comment{
+  line-height:20px; 20%;
 }
