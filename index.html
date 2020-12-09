@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kagong</title>
+    <title>KAGONG</title>
     <link rel = "stylesheet" href="myStyle.css" type = "text/css">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16e368477251c61b33e8b365f4d7a601"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
@@ -18,11 +18,11 @@
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.html">KAGONG</a>
                     </div>
                     <ul class="nav-menu">
                         <li><a href="login.html">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
+                        <li><a href="signin.html">회원가입</a></li>
                     </ul>
                 </nav>
                 <div class="main-content" >
@@ -30,10 +30,20 @@
                         <h1>카공족을 위한</h1>
                         <h1>맞춤 카페 추천서비스</h1>
                     </div> 
-                    <form class = "main-searchbox" method = "POST" name="main-searchbox">      
-                        <input type="search" placeholder="카페 이름 또는 태그 설정" />
-                        <button type = "submit"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>
+                    <form class = "main-searchbox" method = "POST" name="main-searchbox">
+                        <div style="display:flex">
+                            <input type="search" placeholder="카페 이름 또는 태그 설정" onclick="drop()"/>
+                            <button type = "submit" class = "search-btn"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>
+                        </div>
+                        <div id="drop-taglist" style="display:block;">
+                            <button type="button" class="tag-btn" name="tag1" value="좌석 많은">#좌석많은</button>
+                            <button type="button" class="tag-btn" name="tag2" value="24시간">#24시간</button>
+                            <button type="button" class="tag-btn" name="tag3" value="조용한">#조용한</button>
+                            <button type="button" class="tag-btn" name="tag4" value="와이파이">#와이파이</button>
+                        </div>
+
                     </form>
+
                 </div>
             </div>
         </div>

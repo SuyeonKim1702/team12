@@ -14,9 +14,97 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 <?php
-ob_start(); // session 이용
 
-//기본적으로 3명 정도 등록
+
+$seat = [
+  1 => "좌석 적은",
+  2 => "좌석 적당",
+  3 => "좌석 많은",
+];
+
+$mood = [
+  1 => "소란스러운",
+  2 => "무난한 소음",
+  3 => "조용한",
+];
+
+$cost = [
+  1 => "가격 비싼",
+  2 => "가격 보통",
+  3 => "저렴한",
+];
+
+
+#db 연결 부분 
+$conn = mysqli_connect(
+  '15.165.124.76',
+  'osp',
+  '1234',
+  'cagong');
+
+
+
+#작성한 리뷰 post 하는 부분    
+$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
+VALUES
+('$reviewContent', $userIdx, $cafeIdx, $price, $mood, $seat, $totalRating);";
+
+# if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
+
+
+#작성한 리뷰 수정하는 부분
+$modified_review = "UPDATE review
+SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+WHERE reviewIdx = {$reviewIdx};";
+
+# if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
+
+          
+#작성한 리뷰 삭제하는 부분 
+
+$deleted_review = "DELETE FROM review WHERE reviewIdx = {$reviewIdx};";
+ # if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
+
+
+
+
+#리뷰 개수 가져오는 부분 c.cafeIdx는 카페인덱스마다 바뀌어야 함
+$sql1="SELECT count(*) as count
+from review
+join cafe c on review.cafeIdx = c.cafeIdx
+where c.cafeIdx=2;";
+
+
+
+
+#리뷰 리스트 가져오는 부분 c.cafeIdx는 카페인덱스마다 바뀌어야 함
+  $sql2 = "SELECT reviewIdx, reviewContent,nickname, price, mood, seat, totalRating,CASE
+  WHEN TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()) <= 0 THEN '방금 전'
+  WHEN TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()) < 60 THEN CONCAT(TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()), '분 전')
+  WHEN TIMESTAMPDIFF(HOUR, review.createdAt, NOW()) < 24 THEN CONCAT(TIMESTAMPDIFF(HOUR, review.createdAt, NOW()), '시간 전')
+  WHEN TIMESTAMPDIFF(DAY, review.createdAt, NOW()) < 30 THEN CONCAT(TIMESTAMPDIFF(DAY, review.createdAt, NOW()), '일 전')
+  ELSE CONCAT(TIMESTAMPDIFF(MONTH, review.createdAt, NOW()), '달 전')
+END AS createdAt
+FROM review
+join cafe c on review.cafeIdx = c.cafeIdx
+join user u on review.userIdx = u.userIdx
+where c.cafeIdx = 2;";
+
+  $result = mysqli_query($conn, $sql2);
+
+  $cnt = mysqli_query($conn, $sql1);
+
+
+  
+
+
+
+
+#예전 코드                
+$review_number = 3;
 $user_name = array("공시생", "mina98", "먹짱123");
 $user_image = array("images/사용자이미지2.png", "images/사용자이미지1.png", "images/사용자이미지1.png");
 $upload_time = array("5일 전", "2일 전", "2시간 전");
@@ -121,10 +209,6 @@ function delete() {
 </head>
 <body>
 
-<!-- 지금은 데이터를 배열(사용자리뷰 작성 시간순)로 저장했는데, 동적으로 값 전달 받아서 출력하도록 변경해야 함 -->
-<!-- 전체 레이아웃 아직 적용 안함 -->
-<!-- 자신의 글 수정, 삭제 가능하도록 변경헤야 함 -->
-<!-- 검색창 추가 해야 함 -->
 <div>
     <main class="pg-main">
         <div class = "top-container" >
@@ -161,49 +245,53 @@ function delete() {
         <div class="bottom-container">
           <br><br>
           <h2>
-            <?php echo $review_number." 건의 방문자 평가";?>
-            <span class="btn_wrap">
-              <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php'" value="리뷰쓰기" />
-            </span>
+          <?php echo mysqli_fetch_assoc($cnt)['count']."건의 방문자 평가";?>
+            <button type="button" id="write_review" type="submit"><img id="write_review_btn" src="images/리뷰쓰기.png" width=90 height=30></button>
           </h2>
           <table class="review_list" width=600>
           <?php
 
-              while(--$idx>=0){
 
-                print "<tr class='review'>";
-                  print "<td width=120>";
-                    print "<image class='user_img' src='".$user_image[$idx]."' width=100 height=100>";
-                    print "<p style='text-align:center;'>".$user_name[$idx]."</p>";
-                  print "</td>";
-                  print "<td class='review_result'>";
-                    print "<p>";
-                    print "<span class='upload_time'>".$upload_time[$idx]."</span>";
-                    // if($id == session_id){ //사용자의 리뷰이면 삭제 버튼 생성
-                      print "<span class='manage' style='float: right; color:gray'>";
+$review_list_html ="";
+while($row1 = mysqli_fetch_assoc($result)){
 
 
-                        print "<span class='edit' style='margin-right:10px;'><a href='write_review.php'><i class='fas fa-edit'></i></a></span>";
-                        // print "<span class='delete'><a href='#'><i class='fas fa-trash-alt'></i></a></span>";
-                        // print "<span class='delete' ><i class='fas fa-trash-alt'></i></span>";
 
-                        print "<input type='button' value='삭제' id='delete'>";
-                      // 삭제 및 수정 기능 구현하기
 
-                      print "</span>";
-                    // }
-                    print "</p>";
-                    print "<p class='rating_result'>";
-                      print "<i class='fas fa-star' style='font-size:1.75em'></i>";
-                      print "<font size=7>".$score[$idx]."</font>"."<font size=6>".".0"."</font>";
-                      for($i=0; $i<3; $i++){
-                        print "<img class='tag_result' src='".$selectedtags[$idx][$i]."' height=30>";
-                      }
-                    print "</p>";
-                    print "<p class='comment'>".$comment[$idx]."</p>";
-                  print "</td>";
-                print "</tr>";
-              }
+$review_number = count($row1);
+$user_name = $row1['nickname'];
+$user_image = "images/사용자이미지2.png";
+$upload_time = $row1['createdAt'];
+$score =$row1['totalRating'];
+$comment = $row1['reviewContent'];
+
+$review_list_html = $review_list_html."<tr class='review'> <td width=120>
+<image class='user_img' src='".$user_image."' width=100 height=100>
+ <p style='text-align:center;'>".$user_name."</p>
+ </td> <td class='review_result'>
+ <p class='upload_time'>".$upload_time."</p>
+ <p class='rating_result'>
+   <font size=7>".$score."</font>
+   <div>
+   <div class='tag_result'>".$seat[$row1["seat"]]."</div>
+   <div class='tag_result'>".$mood[$row1["mood"]]."</div>
+   <div class='tag_result'>".$cost[$row1["price"]]."</div>
+   </div>
+</p>
+<p class='comment'>".$comment."</p></td></tr>";
+
+
+
+
+   
+  }
+ 
+ mysqli_close($conn);
+
+ echo $review_list_html;
+
+
+
           ?>
           </table>
 
