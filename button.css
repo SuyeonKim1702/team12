@@ -24,7 +24,7 @@
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  }
+}
 
 .button:hover {
   background-color: #ff9900;
@@ -34,14 +34,7 @@
 }
 
 /* tag */
-.btn_wrap {
-  height: 100%;
-  display: inline-block;
-  margin-left: 20px;
-  position: relative;
-  /* align-items: center;
-  justify-content: center; */
-}
+
 .cmd .btn_wrap .button{
   position: relative;
   left: 320px;

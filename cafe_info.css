@@ -1,0 +1,81 @@
+.bottom-container2{
+
+  max-width: 1000px;
+  min-height: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+}
+.picture_panel{
+  background-color: #ECEFF3;
+  padding: 30px;
+  overflow-x:auto;
+  overflow-y:auto;
+  white-space:nowrap;
+  width:800px; height:200px;
+}
+
+
+.picture{
+  margin-right: 10px;
+  height:inherit;
+}
+
+/*cafe info*/
+#main_section{
+  float:left;
+  width: 600px;
+  min-height: 1000px;
+  padding: 20px;
+  margin: 20px;
+
+
+}
+#main_aside{
+  float:right;
+  width: 150px;
+  height: 150px;
+  margin: 20px 0px;
+  padding: 20px;
+  background: #FBFBFB;
+}
+
+
+/* section,aside{float:left;height:300px;padding:10px}
+section{width:250px;background:skyblue}
+aside{width:100px;background:pink} */
+
+
+#edit_seatstatus{
+  width: 100%;
+  background-color: #5295D5;
+  color: white;
+}
+.cafe_infs{
+  margin-top: 30px;
+}
+.cafe_infs tr{
+  height: 30px;
+}
+.cafe_infs td{
+  min-width: 130px;
+}
+
+.inf .row{
+  color: gray;
+}
+
+article .cafe_name{
+  font-size: 1.7em;
+}
+
+.info_tags img{
+    height: 30px;
+    margin-top: 2px;
+}
+.info_tags{
+  margin-top: 20px;
+}

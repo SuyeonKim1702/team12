@@ -7,6 +7,8 @@
 <link rel = "stylesheet" href="review.css" type = "text/css">
 <link rel = "stylesheet" href="button.css" type = "text/css">
 
+
+
 <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -79,12 +81,43 @@ if($_POST != null){
   array_push($selectedtags, array($_POST['price'], $_POST['mood'], $_POST['seat']));
   array_push($comment, $_POST['description']);
 
+
 }
 
 $review_number = count($user_name);
-$count=$review_number;
+$idx = $review_number;
 
+
+function delete() {
+  global $idx;
+    // if($id == session_id()){} //현재 사용자가 맞는지 확인
+    unset($user_name[$idx]);
+    unset($user_image[$idx]);
+    unset($upload_time[$idx]);
+    unset($score[$idx]);
+    unset($selectedtags[$idx]);
+    unset($comment[$idx]);
+
+
+}
 ?>
+<script language="javascript">
+  var t = document.getElementByld('delete');
+  function btn_listener(event){
+    alert("버튼을 누르셨습니다.");
+    <?delete();?>
+    // window.onload = function(){
+    //   if (location.href.indexOf('reloaded')==-1)
+    //     location.replace(location.href+'?reloaded');
+    // }
+    if(self.name != "reload"){
+      self.name = "reload";
+      self.location.reload(true);
+    }
+    else self.name = "";
+  }
+  t.addEventListener('click', btn_listener);
+</script>
 </head>
 <body>
 
@@ -130,25 +163,31 @@ $count=$review_number;
           <h2>
             <?php echo $review_number." 건의 방문자 평가";?>
             <span class="btn_wrap">
-              <input type="button" class="button" id="write_review" value="리뷰쓰기" />
+              <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php'" value="리뷰쓰기" />
             </span>
           </h2>
           <table class="review_list" width=600>
           <?php
-              while(--$count>=0){
+
+              while(--$idx>=0){
+
                 print "<tr class='review'>";
                   print "<td width=120>";
-                    print "<image class='user_img' src='".$user_image[$count]."' width=100 height=100>";
-                    print "<p style='text-align:center;'>".$user_name[$count]."</p>";
+                    print "<image class='user_img' src='".$user_image[$idx]."' width=100 height=100>";
+                    print "<p style='text-align:center;'>".$user_name[$idx]."</p>";
                   print "</td>";
                   print "<td class='review_result'>";
                     print "<p>";
-                    print "<span class='upload_time'>".$upload_time[$count]."</span>";
+                    print "<span class='upload_time'>".$upload_time[$idx]."</span>";
                     // if($id == session_id){ //사용자의 리뷰이면 삭제 버튼 생성
-                      print "<span class='manage' style='float: right'>";
+                      print "<span class='manage' style='float: right; color:gray'>";
 
-                      print "<span class='edit' style='margin-right:10px'><a href='write_review.php'><i class='fas fa-edit'></i></a></span>";
-                      print "<span class='delete'><i class='fas fa-trash-alt'></i></span>";
+
+                        print "<span class='edit' style='margin-right:10px;'><a href='write_review.php'><i class='fas fa-edit'></i></a></span>";
+                        // print "<span class='delete'><a href='#'><i class='fas fa-trash-alt'></i></a></span>";
+                        // print "<span class='delete' ><i class='fas fa-trash-alt'></i></span>";
+
+                        print "<input type='button' value='삭제' id='delete'>";
                       // 삭제 및 수정 기능 구현하기
 
                       print "</span>";
@@ -156,17 +195,18 @@ $count=$review_number;
                     print "</p>";
                     print "<p class='rating_result'>";
                       print "<i class='fas fa-star' style='font-size:1.75em'></i>";
-                      print "<font size=7>".$score[$count]."</font>"."<font size=6>".".0"."</font>";
+                      print "<font size=7>".$score[$idx]."</font>"."<font size=6>".".0"."</font>";
                       for($i=0; $i<3; $i++){
-                        print "<img class='tag_result' src='".$selectedtags[$count][$i]."' height=30>";
+                        print "<img class='tag_result' src='".$selectedtags[$idx][$i]."' height=30>";
                       }
                     print "</p>";
-                    print "<p class='comment'>".$comment[$count]."</p>";
+                    print "<p class='comment'>".$comment[$idx]."</p>";
                   print "</td>";
                 print "</tr>";
               }
           ?>
           </table>
+
         </div>
     </main>
 </div>

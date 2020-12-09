@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Details about Cafe</title>
+  <link rel= "stylesheet" href="review.css" type = "text/css">
+  <link rel= "stylesheet" href="button.css" type = "text/css">
+  <link rel= "stylesheet" href="cafe_info.css" type = "text/css">
+  <script src= "https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
+  <link rel= "preconnect" href = "https://fonts.gstatic.com">
+  <link href= "https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div>
+    <main class="pg-main">
+        <div class = "top-container">
+            <div class="contents">
+                <nav class="navbar">
+                    <div class="nav-logo">
+                        <i class="fas fa-coffee"></i>
+                        <a href="">KAGONG</a>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="">회원가입</a></li>
+                    </ul>
+                </nav>
+                <div class="main-content" >
+                    <div class="title">
+                        <h1>카공족을 위한</h1>
+                        <h1>맞춤 카페 추천서비스</h1>
+                    </div>
+                    <form class = "main-searchbox" method = "POST" name="main-searchbox">
+                        <input type="search" placeholder="카페 이름 또는 태그 설정" />
+                        <button type = "submit"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <nav class = "nav_cafe">
+                    <a href="/">검색 결과</a>
+                    <a href="/">카페 정보</a>
+                    <a href="/">리뷰 목록</a>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom-container2">
+
+
+          <figure class ="cafe_pictures">
+
+
+            <div class="picture_panel">
+                <img class="picture" src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200818_294%2F1597756409501puSKH_JPEG%2F4H8H3eCbJNhdXcCbCslhX6Li.jpg">
+                <img class="picture" src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200818_23%2F15977564316905Gc94_JPEG%2FBxOawK_nf9WWb-UoQMbxrj5x.jpg">
+                <img class="picture" src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200818_95%2F1597756431431rCKoz_JPEG%2FCQxJ0OGrnrxc2LHl-3BsMSBq.jpg">
+            </div>
+
+          </figure>
+
+          <section id="main_section">
+
+            <article>
+              <span class="cafe_name">비바체스터디카페 이대점</span>
+              <i class="fas fa-star" style="color:#ffcc00; font-size: 1.2em;"></i>
+              <span style="color:#3597DB; font-size: 1.2em">4.3</span>
+              <span class="btn_wrap">
+                <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php'" value="리뷰쓰기" />
+              </span>
+            </article>
+
+            <article>
+                <!--tags-->
+              <div class="info_tags">
+                <img src="info_tags/따뜻한.png">
+                <img src="info_tags/아늑한.png">
+                <img src="info_tags/음악소리작은.png">
+                <img src="info_tags/콘센트많은.png">
+                <img src="info_tags/평점높은.png">
+                <img src="info_tags/이벤트.png">
+                <img src="info_tags/창문이넓은.png">
+                <img src="info_tags/디저트종류다양.png">
+                <img src="info_tags/남녀화장실분리.png">
+                <img src="info_tags/편한의자.png">
+                <img src="info_tags/주황색조명.png">
+              </div>
+
+            </article>
+            <article>
+              <table class="cafe_infs">
+                <tr class="inf">
+                  <td class="row">주소</td>
+                  <td>서울 서대문구 이화여대길 52-49 5층 (우)03765</td>
+                </tr>
+                <tr class="inf">
+                  <td class="row">전화번호</td>
+                  <td>02-363-9611</td>
+                </tr>
+                <tr class="inf">
+                  <td class="row">영업시간</td>
+                  <td>매일 00:00 ~ 24:00</td>
+                </tr>
+              </table>
+            </article>
+          </section>
+
+          <aside id="main_aside">
+            <p>현재 좌석 수: 5석</p>
+            <span class="btn_wrap">
+              <input type="button" class="button" id="edit_seatstatus" onclick = "location.href='edit_seat.php'" value="좌석 정보 수정"/>
+            </span>
+
+          </aside>
+
+        </div>
+    </main>
+</div>
+
+<!-- 아직 안한 부분: 리뷰 리스트 - 리뷰 수정, 삭제 -->
+
+</body>
+</html>
