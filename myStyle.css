@@ -28,19 +28,7 @@ body{
     left: 350px;
 
 }
-.main-content #drop-taglist{
 
-    position: relative;
-    background-color: #fff;
-    border-width:1px;
-    border-style:solid;
-    border-color: #afacac;
-    border-radius: 6px;
-    box-shadow: 2px 5px 5px 3px rgba(0,1,3,.1);
-    padding: 15px;
-    height: 200px;
-
-}
 
 .navbar{
     display: flex;
@@ -70,8 +58,8 @@ body{
 .nav-menu li{
     padding:8px 15px;
 }
-/* 검색창 */
 
+/*------------ 검색창 꾸미기-----------*/
 .title{
     color: white;
     text-align: center;
@@ -97,6 +85,42 @@ form.main-searchbox input{
     border-radius:0 25px 25px 0;
     border:none;
     margin-left:-8px;
+
+}
+.main-content #drop-taglist{
+    /*서치버튼 클릭시 태그 리스트창 */
+    position: relative;
+    background-color: #fff;
+    border-width:1px;
+    border-style:solid;
+    border-color: #afacac;
+    border-radius: 6px;
+    padding:0 15px 15px 15px;
+    box-shadow: 2px 5px 5px 3px rgba(0,1,3,.1);
+
+
+}
+.taglist-notice p{
+    font-size:12px;
+    line-height: 130%;
+    color: #747474;
+    font-weight: bold;
+
+}
+
+.taglist-bottom .tag-btn{
+    font-size:15px;
+    margin:5px;
+    padding:0px 10px 0px 10px;
+    border-radius:25px 25px 25px 25px;
+    cursor:pointer;
+    border:none;
+    font-family:"Nanum Gothic Coding";
+    background-color: #e8e8e8;
+    height:32px;
+    font-weight: bold;
+    color: #828282;
+
 
 }
 
