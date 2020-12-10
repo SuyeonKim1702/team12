@@ -13,10 +13,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
-<?php
-session_start();
-$cafe_name = "카페 비엔";
-?>
 
 </head>
 
@@ -77,45 +73,45 @@ $cafe_name = "카페 비엔";
               <tr><div id="review_tag1">
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
-                    <input type="radio" name="price" id="cheap" value="/tags/가격저렴.png">
+                    <input type="radio" name="price" id="cheap" value="가격저렴">
                     <img src="/tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" id="reasonable" value="/tags/가격적당.png" checked>
+                    <input type="radio" name="price" id="reasonable" value="가격적당" checked>
                     <img src="/tags/보통.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" id="expensive" value="/tags/가격비쌈.png">
+                    <input type="radio" name="price" id="expensive" value="가격비쌈">
                     <img src="/tags/비싸다.png" height=30>
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
-                  <input type="radio" name="mood" id="quiet" value="/tags/조용한.png">
+                  <input type="radio" name="mood" id="quiet" value="조용한">
                   <img src="/tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" id="normal" value="/tags/적당한.png" checked>
+                  <input type="radio" name="mood" id="normal" value="적당한" checked>
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" id"noisy" value="/tags/소란스러운.png">
+                  <input type="radio" name="mood" id"noisy" value="소란스러운">
                   <img src="/tags/소란스럽다.png" height=30>
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
                 <td><label class="category" for="seat">좌석 갯수</label></td>
                 <td><label class="column">
-                  <input type="radio" name="seat" id="few" value="/tags/붐비는.png">
+                  <input type="radio" name="seat" id="few" value="붐비는">
                   <img src="/tags/적다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" id="average" value="/tags/좌석보통.png" checked>
+                  <input type="radio" name="seat" id="average" value="좌석보통" checked>
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" id="many" value="/tags/좌석많은.png">
+                  <input type="radio" name="seat" id="many" value="좌석많은">
                   <img src="/tags/많다.png" height=30>
                 </label></td>
               </div></tr>
@@ -144,16 +140,10 @@ $cafe_name = "카페 비엔";
 
             <br>
 
-            <div class="review_contents" name="comment">
+            <div class="review_contents" name="reviewContent">
                 <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
                 <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"></textarea></p>
             </div>
-
-            <?php
-
-            $upload_time = new DateTime();        //현재시간의 정보를 $upload_time 변수에 저장
-            $_SESSION['upload_time'] = $upload_time;
-            ?>
 
             <div class="cmd">
               <div class="btn_wrap">
@@ -162,16 +152,12 @@ $cafe_name = "카페 비엔";
               <div class="btn_wrap">
                 <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
-
-                <!-- 취소 기능 아직 안함 -->
             </div>
 
           </form>
         </div>
     </main>
 </div>
-
-<!-- 아직 안한 부분: 리뷰 리스트 - 리뷰 수정, 삭제 -->
 
 </body>
 </html>
