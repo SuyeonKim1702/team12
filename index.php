@@ -1,5 +1,12 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우 
 
+}
+?>
+   
 <head>
     <meta charset="UTF-8">
     <title>KAGONG</title>
@@ -10,7 +17,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
+
+
+
+
 <div>
     <main class="pg-main">
         <div class = "top-container" >

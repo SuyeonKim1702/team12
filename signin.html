@@ -38,11 +38,18 @@
                 return false;
             }
 
+           
+
             if(document.join.nickname.value === "") {
                 alert("이름을 입력해 주세요");
                 document.join.nickname.value.focus();
                 return false;
             }
+
+
+
+
+
 
 
 
@@ -69,7 +76,7 @@
                     <i class="fas fa-coffee"></i>
                     <a href="index.html">KAGONG</a>
                 </div>
-                <form name="join" onsubmit="sign_in()" action="" method="post">
+                <form name="join" onsubmit="sign_in()" action="success.php" method="post">
                     <section class="signin-input-section-wrap">
                         <div class="sign-input-wrap">
                             <p>닉네임</p>
@@ -77,7 +84,7 @@
                         </div>
                         <div class="sign-input-wrap">
                             <p>아이디</p>
-                            <input placeholder="아이디" id="ID" type="text" maxlength="20" value="">
+                            <input placeholder="아이디" name = "id" id="ID" type="text" maxlength="20" value="">
                             <p class="condition">*영어 대소문자/숫자로 5~20자</p>
                         </div>
                         <div class="sign-input-wrap password-input-wrap">
