@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -61,6 +62,9 @@ $cafe_name = "카페 비엔";
         <div class="bottom-container">
 
           <form name="reviewform" class="reviewform" method="post" action="review_list.php">
+            <input type="hidden" name="id" value="review">
+            <input type="hidden" name="userid" value="<?= $_SESSION['userid'] ?>">
+            <input type="hidden" name="name" value="<?= $_SESSION['name'] ?>">
             <br><br>
             <h3>
               <?php
@@ -156,7 +160,7 @@ $cafe_name = "카페 비엔";
                 <input class="button" type="submit" name="save" id="save" value="등록">
               </div>
               <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
 
                 <!-- 취소 기능 아직 안함 -->
