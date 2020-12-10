@@ -1,0 +1,58 @@
+.bottom-container2{
+  max-width: 1300px;
+  min-height: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cafe-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32%, auto));
+  grid-auto-rows: minmax(210px, auto);
+  row-gap: 20px;
+  column-gap: 20px;
+  grid-auto-flow: dense;
+  justify-items: stretch;
+}
+
+/* table, tr, td{
+  border: 1px solid;
+} */
+.cafe_box{
+  width: 380px;
+  height: 210px;
+  background-color: #F3F1FA;
+
+  /*영역 자체에 링크*/
+  cursor:pointer;
+}
+.cafe_box1 {
+  width: 200px;
+  text-align: center;
+}
+.cafe_box1 .cafe_image{
+  width: 180px;
+  height: 170px;
+  overflow: hidden;
+}
+.cafe_box1 .cafe_image img{
+  max-width: 100%;
+  height:auto;
+  display:block;
+  margin-left: 10px;
+}
+
+.cafe_box1 .cafe_name{
+  font-size: 1em;
+  position: relative;
+  /* top: -10px; */
+}
+.cafe_box2 {
+  padding: 10px;
+}
+.cafe_box2 img{
+  height: 30px;
+}
