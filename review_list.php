@@ -41,18 +41,18 @@ $conn = mysqli_connect(
 
 
 #작성한 리뷰 post 하는 부분    
-$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
-VALUES
-('$reviewContent', $userIdx, $cafeIdx, $price, $mood, $seat, $totalRating);";
+#$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
+#VALUES
+#('$reviewContent', $userIdx, $cafeIdx, $price, $mood, $seat, $totalRating);";
 
 # if (!mysqli_query($conn,$sql)){
 #die('Error: ' . mysqli_error($conn)); }
 
 
 #작성한 리뷰 수정하는 부분
-$modified_review = "UPDATE review
-SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
-WHERE reviewIdx = {$reviewIdx};";
+#$modified_review = "UPDATE review
+#SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+#WHERE reviewIdx = {$reviewIdx};";
 
 # if (!mysqli_query($conn,$sql)){
 #die('Error: ' . mysqli_error($conn)); }
@@ -60,8 +60,8 @@ WHERE reviewIdx = {$reviewIdx};";
           
 #작성한 리뷰 삭제하는 부분 
 
-$deleted_review = "DELETE FROM review WHERE reviewIdx = {$reviewIdx};";
- # if (!mysqli_query($conn,$sql)){
+#$deleted_review = "DELETE FROM review WHERE reviewIdx = {$reviewIdx};";
+# if (!mysqli_query($conn,$sql)){
 #die('Error: ' . mysqli_error($conn)); }
 
 
