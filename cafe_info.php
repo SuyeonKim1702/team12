@@ -3,6 +3,7 @@
 
 $index = $_GET['cafeIdx']; 
 $path = 'seat.php?cafeIdx='.$index;
+$review_path ='review_list.php?cafeIdx='.$index;
 
 function phone_number_format($number)
 {
@@ -115,7 +116,7 @@ $cafeRating = $row1['rating'];
                 <nav class = "nav_cafe">
                     <a href="/">검색 결과</a>
                     <a href="cafe_info.html">카페 정보</a>
-                    <a href="review_list.php">리뷰 목록</a>
+                    <a href=<?php echo '"'.$review_path.'"' ?>>리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -184,7 +185,7 @@ $cafeRating = $row1['rating'];
                 <input type="button" class="button" id="seatstatus_btn" onclick = "writeStatus();" value="좌석 정보 수정"/>
               </div>
             </div>
-            <form class="set_seat" method="POST" action= <?php echo $path; ?> name="setSeat" id="seat-box" style="display:none">
+            <form class="set_seat" method="POST" action= <?php echo $path ?> name="setSeat" id="seat-box" style="display:none">
               <p>현재 카페의 자리 수는 어떤가요?</p>
               <p>
                 <input type="radio" id="seat1" name="radio-group" checked>

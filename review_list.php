@@ -12,6 +12,19 @@
 
 <?php
 
+if(isset($_SESSION[ 'userIdx' ])){
+  //로그인 되어있는 유저의 인덱스
+  $currentUser = $_SESSION['userIdx'];
+}else{
+  //로그인 되어있지 않을 때는 디폴트 -1
+  $currentUser = -1;
+}
+
+//카페 인덱스
+$index = $_GET['cafeIdx']; 
+
+
+
 $seat = [
   1 => "좌석 적은",
   2 => "좌석 적당",
@@ -88,13 +101,13 @@ $conn = mysqli_connect(
 $sql1="SELECT count(*) as count
 from review
 join cafe c on review.cafeIdx = c.cafeIdx
-where c.cafeIdx=2;";
+where c.cafeIdx=".$index.";";
 
 
 
 
 #리뷰 리스트 가져오는 부분 c.cafeIdx는 카페인덱스마다 바뀌어야 함
-  $sql2 = "SELECT reviewIdx, reviewContent,nickname, price, mood, seat, totalRating,CASE
+  $sql2 = "SELECT reviewIdx, reviewContent,nickname, price, mood, seat, u.userIdx as userIdx, totalRating,CASE
   WHEN TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()) <= 0 THEN '방금 전'
   WHEN TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()) < 60 THEN CONCAT(TIMESTAMPDIFF(MINUTE, review.createdAt, NOW()), '분 전')
   WHEN TIMESTAMPDIFF(HOUR, review.createdAt, NOW()) < 24 THEN CONCAT(TIMESTAMPDIFF(HOUR, review.createdAt, NOW()), '시간 전')
@@ -104,7 +117,7 @@ END AS createdAt
 FROM review
 join cafe c on review.cafeIdx = c.cafeIdx
 join user u on review.userIdx = u.userIdx
-where c.cafeIdx = 2;";
+where c.cafeIdx = {$index};";
 
   $result = mysqli_query($conn, $sql2);
 
@@ -225,7 +238,7 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 
 
 
-          ?>
+ ?>
           </table>
         </div>
     </main>

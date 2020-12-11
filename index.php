@@ -3,6 +3,15 @@
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우 
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+
+}else{
+    $top = '<ul class="nav-menu">
+<li><a href="login.html">로그인</a></li>
+<li><a href="signin.html">회원가입</a></li>
+</ul>';
 
 }
 ?>
@@ -16,7 +25,11 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
     <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="/test/wp-content/themes/child/script/jquery.jcarousel.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
     <script type = "text/javascript">
 
         // 태그리스트 외의 영역 클릭시 태그리스트 숨김
@@ -35,7 +48,10 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
         }
         //검색 버튼 클릭시 페이지 이동
         function click_search(){
-            window.location.href="cafe_list.php"
+            var markersField = document.getElementById('markers');
+            var markers = tagArr;
+           markersField.value = JSON.stringify(markers);
+           document.searchForm.submit();
         }
 
     </script>
@@ -50,10 +66,7 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
                         <i class="fas fa-coffee"></i>
                         <a href="index.html">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
-                        <li><a href="signin.html">회원가입</a></li>
-                    </ul>
+                   <?php echo $top ?>
                 </nav>
                 <div class="main-content" >
                     <div class="title">
@@ -61,9 +74,10 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
                         <h1>맞춤 카페 추천서비스</h1>
                     </div>
                 <!--  검색창   -->
-                    <form name="searchForm" class = "main-searchbox" onsubmit="click_search(); return false" method = "POST" >
+                    <form name="searchForm" class = "main-searchbox" action="cafe_list.php" onsubmit="click_search(); return false" method = "POST" >
                         <div style="display:flex">
                             <input type="search" placeholder="카페 이름 입력 또는 태그 설정" name="cafeName" id="cafeName" onclick="drop()"/>
+                            <input type="hidden" id="markers" name="markers">
                             <button type = "submit" class = "search-btn"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>
                         </div>
                         <div id="drop-taglist" style="display:none;">
@@ -91,25 +105,36 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
                                 <button type="button" class="gray tag-btn" id="19" name="tags" value="좌석 갯수 보통" >#좌석 갯수 보통</button>
                                 <button type="button" class="gray tag-btn" id="20" name="tags" value="공간 넓은" >#공간 넓은</button>
                                 <button type="button" class="gray tag-btn" id="21" name="tags" value="주차장 완비" >#주차장 완비</button>
+                                <button type="button" class="gray tag-btn" id="22" name="tags" value="요새 뜨는" >#요새 뜨는</button>
                             </div>
                         </div>
                         <script>
                             //클릭된 태그의 id를 tagArr 배열에 저장/삭제, 색깔변경
                             var tagArr = [];
-                            $(document).ready(function () {
+                           
+                             $(document).ready(function () {
                                 $("button").click(function () {
                                         $(this).toggleClass('orange');
                                         $(this).toggleClass('gray');
                                         if (this.className == 'tag-btn orange') {
-                                            tagArr.push(Number(this.id))
+                                            tagArr.push(Number(this.id));
+                                           
+                                            
+                                           
                                             console.log(tagArr);
                                         } else if (this.className == 'tag-btn gray') {
                                             const delNum = tagArr.indexOf(Number(this.id));
-                                            tagArr.splice(delNum,1);
+
+                                    
+                                           
                                             console.log(tagArr);
+                                            
                                         }
                                     }
                                 );
+                        
+
+
                             });
                         </script>
 

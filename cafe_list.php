@@ -12,22 +12,38 @@
 <link href= "https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 <?php
 
+session_start();
+
+
 $conn = mysqli_connect(
   '15.165.124.76',
   'osp',
   '1234',
   'cagong');
 
+$string = $_POST['markers'];
+$string = str_replace ("[", "(", $string);
+$string = str_replace ("]", ")", $string);
 
-$taglist = [1,2,3,4];
 $keyword = $_POST['cafeName'];
 if(strlen($keyword) == 0){
- 
-  //태그로 검색
-}else{
+  if(strlen($string)>2){
+    $cafelist = "SELECT c.cafeIdx as cafeIdx, distance, c.cafename as cafename, x, y, availableSeat, count(hashtagIdx) as count from hashtagList
+    join cafe c on hashtagList.cafeIdx = c.cafeIdx
+    where hashtagIdx IN ".$string."
+    group by c.cafeIdx
+    order by count DESC, distance;";
   
+  }else{
+    $cafelist="";
+  }
+  
+
+  
+  //태그로 검색
+}else{ 
   //카페 이름으로 검색
-  $cafelist = "SELECT cafeIdx, cafename, availableSeat  FROM cafe WHERE cafename LIKE '%".$keyword."%' order by distance;";
+  $cafelist = "SELECT cafeIdx, cafename, availableSeat, x, y  FROM cafe WHERE cafename LIKE '%".$keyword."%' order by distance;";
   
 }
 
@@ -93,12 +109,16 @@ if(strlen($keyword) == 0){
           $result = mysqli_query($conn, $cafelist);
 
           
-
-while($row1 = mysqli_fetch_assoc($result)){
-  
+$j = 0;
+while($row1 = mysqli_fetch_assoc($result) and $j < 40){
+  $j = $j +1;
   $cafeidx = $row1['cafeIdx'];
   $cafeName = $row1['cafename'];
   $seat = $row1['availableSeat'];
+
+  //x -> 위도, y -> 경도
+  $x = $row1['x'];
+  $y = $row1['y'];
   
 
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName

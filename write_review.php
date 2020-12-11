@@ -96,7 +96,7 @@
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" id"noisy" value="소란스러운">
+                  <input type="radio" name="mood" id="noisy" value="소란스러운">
                   <img src="/tags/소란스럽다.png" height=30>
                 </label></td>
               </div></tr>

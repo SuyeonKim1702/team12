@@ -10,7 +10,7 @@
 
 
 $pw = $_POST['pw'];
-$email = $_POST['id'];
+$email = $_POST['email'];
 
 
 #db 연결 부분 
@@ -22,7 +22,7 @@ $conn = mysqli_connect(
 
 
    # 로그인 -> 사용자가 입력한 비밀번호랑 db에 있는 비밀번호랑 맞는지 확인해야 함
-   $user = "SELECT password, nickname from user where email='{$email}';";
+   $user = "SELECT password, nickname, userIdx from user where email='{$email}';";
 
    $result = mysqli_query($conn, $user);
 
@@ -42,6 +42,7 @@ $conn = mysqli_connect(
  
          $_SESSION['is_logged'] = 'Y';
          $_SESSION['nickname'] = $row1['nickname'];
+         $_SESSION['userIdx'] = $row1['userIdx'];
          
          
      
