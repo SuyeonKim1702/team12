@@ -11,6 +11,9 @@
 
 
 #db 연결 부분 
+
+$index = $_GET['cafeIdx']; 
+$path = 'seat.php?cafeIdx='.$index;
 $conn = mysqli_connect(
     '15.165.124.76',
     'osp',
@@ -18,7 +21,7 @@ $conn = mysqli_connect(
     'cagong');
 
 
-    $cafeIdx = 1;
+    $cafeIdx = $index;
     $detailSeat = $_POST['detailseat'];
 
 
@@ -32,12 +35,10 @@ SET availableSeat = {$detailSeat}
   if (!mysqli_query($conn,$seat)){
  die('Error: ' . mysqli_error($conn));
  }
- echo "<script language=javascript> document.location.href = 'cafe_info.php'; </script>";
-
 
 
   
-
+ echo "<script>location.replace('cafe_info.php?cafeIdx=".$index."')</script>";
   
 
 

@@ -28,7 +28,9 @@
         }
         //검색 버튼 클릭시 페이지 이동
         function click_search(){
-            window.location.href="cafe_list.php"
+    
+        document.searchForm.submit();
+           
         }
 
     </script>
@@ -54,7 +56,7 @@
                         <h1>맞춤 카페 추천서비스</h1>
                     </div>
                 <!--  검색창   -->
-                    <form name="searchForm" class = "main-searchbox" onsubmit="click_search(); return false" method = "POST" >
+                    <form name="searchForm" class = "main-searchbox" action="cafe_list.php" onsubmit="click_search(); return false" method = "POST" >
                         <div style="display:flex">
                             <input type="search" placeholder="카페 이름 입력 또는 태그 설정" name="cafeName" id="cafeName" onclick="drop()"/>
                             <button type = "submit" class = "search-btn"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>

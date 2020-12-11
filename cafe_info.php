@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php
 
+$index = $_GET['cafeIdx']; 
+$path = 'seat.php?cafeIdx='.$index;
+
 function phone_number_format($number)
 {
     if(preg_match( '/(\d{3})(\d{4})(\d{4})$/', $number,  $matches))
@@ -23,16 +26,16 @@ function phone_number_format($number)
 
     $info ="SELECT cafeIdx, cafename, availableSeat, tel, address
     from cafe
-    where cafeIdx = 1;";
+    where cafeIdx = {$index};";
 
     $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
     from hashtagList
     join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
-    where cafeIdx=1;";
+    where cafeIdx={$index};";
 
     $avg_rating = "SELECT AVG(totalRating) as rating
     from review
-    where cafeIdx = 7;";
+    where cafeIdx = {$index};";
 
 
 
@@ -181,7 +184,7 @@ $cafeRating = $row1['rating'];
                 <input type="button" class="button" id="seatstatus_btn" onclick = "writeStatus();" value="좌석 정보 수정"/>
               </div>
             </div>
-            <form class="set_seat" method="POST" action="seat.php" name="setSeat" id="seat-box" style="display:none">
+            <form class="set_seat" method="POST" action= <?php echo $path; ?> name="setSeat" id="seat-box" style="display:none">
               <p>현재 카페의 자리 수는 어떤가요?</p>
               <p>
                 <input type="radio" id="seat1" name="radio-group" checked>
