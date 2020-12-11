@@ -12,17 +12,21 @@
         var len = password.length;
         if(document.login.email.value==""){
             alert("이메일을 입력하세요.");
+            return false;
 
         }
         else if(document.login.pw.value==""){
             alert("비밀번호를 입력하세요.");
+            return false;
         }
         else if(len<8 || len>15){
             alert("비밀번호를 8자 이상 15자 이하로 입력해 주세요.");
+            return false;
 
         }
         else {
-            window.location.href="index.html";  //성공시 홈화면으로 이동
+            
+            document.login.submit(); 
         }
     }
 
@@ -37,7 +41,7 @@
                 <a href="index.html">KAGONG</a>
             </div>
         </header>
-        <form name="login" onsubmit="log_in(); return false" action="" method = "post">
+        <form name="login" onsubmit="log_in()" action="in.php" method = "post">
             <section class="login-input-section-wrap">
                 <div class="login-input-wrap">
                     <input placeholder="이메일" name="email" id="email" type="email" maxlength="30" value=""></input>

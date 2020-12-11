@@ -16,7 +16,7 @@
 
 $nickname = $_POST['nickname'];
 $pw = $_POST['pw'];
-$email = $_POST['id'];
+$email = $_POST['email'];
 
 
 #db 연결 부분 

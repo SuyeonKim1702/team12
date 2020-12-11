@@ -43,7 +43,7 @@
   margin: 20px 0px;
   padding: 20px;
   background: #F3F1FA;
-  line-height:20px; 20%
+  line-height:20px; 
 }
 
 
@@ -154,3 +154,4 @@ form.set_seat #seat_input{
     /* 음각 없애기 */
     border:none;
 }
+
