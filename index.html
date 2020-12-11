@@ -9,8 +9,9 @@
     <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     <script type = "text/javascript">
+
         // 태그리스트 외의 영역 클릭시 태그리스트 숨김
         $(document).mouseup(function (e) {
             var container = $("#drop-taglist");
@@ -25,14 +26,9 @@
                 document.getElementById("drop-taglist").style.display ='block';
             }
         }
-
-        function click_button(){
-
-
-        }
-
+        //검색 버튼 클릭시 페이지 이동
         function click_search(){
-
+            window.location.href="cafe_list.php"
         }
 
     </script>
@@ -58,40 +54,57 @@
                         <h1>맞춤 카페 추천서비스</h1>
                     </div>
                 <!--  검색창   -->
-                    <form class = "main-searchbox" onsubmit="click_search" method = "POST" name="main-searchbox">
+                    <form name="searchForm" class = "main-searchbox" onsubmit="click_search(); return false" method = "POST" >
                         <div style="display:flex">
-                            <input type="search" placeholder="카페 이름 입력 또는 태그 설정" onclick="drop()"/>
+                            <input type="search" placeholder="카페 이름 입력 또는 태그 설정" name="cafeName" id="cafeName" onclick="drop()"/>
                             <button type = "submit" class = "search-btn"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>
                         </div>
                         <div id="drop-taglist" style="display:none;">
-                            <div class="taglist-notice">
-                                <p>*태그는 최대 7개까지 선택 가능합니다.</p>
-                            </div>
+
                             <!--   태그   -->
                             <div class="taglist-bottom">
-                                <button type="button" class="tag-btn" name="tag1" value="좌석 많은" onclick="click_button()">#좌석 많은</button>
-                                <button type="button" class="tag-btn" name="tag2" value="매장이 넓은" onclick="click_button()">#매장이 넓은</button>
-                                <button type="button" class="tag-btn" name="tag3" value="24시간" onclick="click_button()">#24시간</button>
-                                <button type="button" class="tag-btn" name="tag4" value="스터디 카페" onclick="click_button()">#스터디 카페</button>
-                                <button type="button" class="tag-btn" name="tag5" value="와이파이" onclick="click_button()">#와이파이</button>
-                                <button type="button" class="tag-btn" name="tag6" value="저렴한" onclick="click_button()">#저렴한</button>
-                                <button type="button" class="tag-btn" name="tag7" value="콘센트 많은" onclick="click_button()">#콘센트 많은</button>
-                                <button type="button" class="tag-btn" name="tag8" value="남/녀 화장실 분리" onclick="click_button()">#남/녀 화장실 분리</button>
-                                <button type="button" class="tag-btn" name="tag9" value="주황색 조명" onclick="click_button()">#주황색 조명</button>
-                                <button type="button" class="tag-btn" name="tag10" value="흰색 조명" onclick="click_button()">#흰색 조명</button>
-                                <button type="button" class="tag-btn" name="tag11" value="흡연 구역" onclick="click_button()">#흡연 구역</button>
-                                <button type="button" class="tag-btn" name="tag12" value="음악 소리 작은" onclick="click_button()">#음악 소리 작은</button>
-                                <button type="button" class="tag-btn" name="tag13" value="감성적인 인테리어" onclick="click_button()">#감성적인 인테리어</button>
-                                <button type="button" class="tag-btn" name="tag14" value="깔끔한 인테리어" onclick="click_button()">#깔끔한 인테리어</button>
-                                <button type="button" class="tag-btn" name="tag15" value="넓은 테이블" onclick="click_button()">#넓은 테이블</button>
-                                <button type="button" class="tag-btn" name="tag16" value="1인석" onclick="click_button()">#1인석</button>
-                                <button type="button" class="tag-btn" name="tag17" value="음료 메뉴 다양한" onclick="click_button()">#음료 메뉴 다양한</button>
-                                <button type="button" class="tag-btn" name="tag18" value="디저트 메뉴 다양한" onclick="click_button()">#디저트 메뉴 다양한</button>
-                                <button type="button" class="tag-btn" name="tag19" value="창문이 넓은" onclick="click_button()">#창문이 넓은</button>
-                                <button type="button" class="tag-btn" name="tag20" value="편한 의자" onclick="click_button()">#편한 의자</button>
-                                <button type="button" class="tag-btn" name="tag21" value="2층 이상" onclick="click_button()">#2층 이상</button>
+                                <button type="button" class="gray tag-btn" id="1" name="tags" value="좌석 많은">#좌석 많은</button>
+                                <button type="button" class="gray tag-btn" id="2" name="tags" value="조용한" >#조용한</button>
+                                <button type="button" class="gray tag-btn" id="3" name="tags" value="24시간 운영" >#24시간 운영</button>
+                                <button type="button" class="gray tag-btn" id="4" name="tags" value="저렴한" >#저렴한</button>
+                                <button type="button" class="gray tag-btn" id="5" name="tags" value="아늑한" >#아늑한</button>
+                                <button type="button" class="gray tag-btn" id="6" name="tags" value="디저트 종류 다양" >#디저트 종류 다양</button>
+                                <button type="button" class="gray tag-btn" id="7" name="tags" value="남/녀 화장실 분리" >#남/녀 화장실 분리</button>
+                                <button type="button" class="gray tag-btn" id="8" name="tags" value="콘센트 많은" >#콘센트 많은</button>
+                                <button type="button" class="gray tag-btn" id="9" name="tags" value="편한 의자" >#편한 의자</button>
+                                <button type="button" class="gray tag-btn" id="10" name="tags" value="이벤트" >#이벤트</button>
+                                <button type="button" class="gray tag-btn" id="11" name="tags" value="창문 넓은" >#창문 넓은</button>
+                                <button type="button" class="gray tag-btn" id="12" name="tags" value="밝은 인테리어" >#밝은 인테리어</button>
+                                <button type="button" class="gray tag-btn" id="13" name="tags" value="음악소리 작은" >#음악소리 작은</button>
+                                <button type="button" class="gray tag-btn" id="14" name="tags" value="평점 높은" >#평점 높은</button>
+                                <button type="button" class="gray tag-btn" id="15" name="tags" value="붐비는" >#붐비는</button>
+                                <button type="button" class="gray tag-btn" id="16" name="tags" value="소란스러운" >#소란스러운</button>
+                                <button type="button" class="gray tag-btn" id="17" name="tags" value="가격 적당" >#가격 적당</button>
+                                <button type="button" class="gray tag-btn" id="18" name="tags" value="가격 비쌈" >#가격 비쌈</button>
+                                <button type="button" class="gray tag-btn" id="19" name="tags" value="좌석 갯수 보통" >#좌석 갯수 보통</button>
+                                <button type="button" class="gray tag-btn" id="20" name="tags" value="공간 협소" >#공간 협소</button>
+                                <button type="button" class="gray tag-btn" id="21" name="tags" value="주차장 완비" >#주차장 완비</button>
                             </div>
                         </div>
+                        <script>
+                            //클릭된 태그의 id를 tagArr 배열에 저장/삭제, 색깔변경
+                            var tagArr = [];
+                            $(document).ready(function () {
+                                $("button").click(function () {
+                                        $(this).toggleClass('orange');
+                                        $(this).toggleClass('gray');
+                                        if (this.className == 'tag-btn orange') {
+                                            tagArr.push(Number(this.id))
+                                            console.log(tagArr);
+                                        } else if (this.className == 'tag-btn gray') {
+                                            const delNum = tagArr.indexOf(Number(this.id));
+                                            tagArr.splice(delNum,1);
+                                            console.log(tagArr);
+                                        }
+                                    }
+                                );
+                            });
+                        </script>
 
                     </form>
 
@@ -99,6 +112,7 @@
             </div>
         </div>
         <div class="bottom-container">
+            <!--    왼쪽 영역     -->
             <div class="bottom-left-container">
                 <div class="intro">
                     <p>회원님의 현재 위치를 기반으로
@@ -113,6 +127,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- 오른쪽 영역: 지도 -->
             <div class="bottom-right-container">
                 <div id="map" style="width:620px;height:480px;"></div>
                 <script type="text/javascript" src = "homeMap.js"></script>

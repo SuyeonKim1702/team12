@@ -95,7 +95,7 @@ form.main-searchbox input{
     border-style:solid;
     border-color: #afacac;
     border-radius: 6px;
-    padding:0 15px 15px 15px;
+    padding:15px 15px 15px 15px;
     box-shadow: 2px 5px 5px 3px rgba(0,1,3,.1);
 
 
@@ -116,14 +116,20 @@ form.main-searchbox input{
     cursor:pointer;
     border:none;
     font-family:"Nanum Gothic Coding";
-    background-color: #e8e8e8;
     height:32px;
     font-weight: bold;
-    color: #828282;
 
 
 }
+.orange{
+    background-color: #ffaa00;
+    color:white;
+}
 
+.gray{
+    background-color: #e8e8e8;
+    color: #828282;
+}
 
 .bottom-container{
     display:flex;
@@ -166,3 +172,4 @@ form.main-searchbox input{
     top:70%;
     left:70%;
 }
+
