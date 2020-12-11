@@ -1,0 +1,65 @@
+<!doctype HTML>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 - KAGONG</title>
+    <link rel="stylesheet" href="loginStyle.css" type="text/css">
+    <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <script type = "text/javascript">
+    function log_in(){
+        var password = document.getElementById("pw").value;
+        var len = password.length;
+        if(document.login.email.value==""){
+            alert("이메일을 입력하세요.");
+            return false;
+
+        }
+        else if(document.login.pw.value==""){
+            alert("비밀번호를 입력하세요.");
+            return false;
+        }
+        else if(len<8 || len>15){
+            alert("비밀번호를 8자 이상 15자 이하로 입력해 주세요.");
+            return false;
+
+        }
+        else {
+
+            
+            document.login.submit(); 
+
+        }
+    }
+
+    </script>
+</head>
+<body>
+<div class="main-container">
+    <div class="main-wrap">
+        <header>
+            <div class="logo">
+                <i class="fas fa-coffee"></i>
+                <a href="index.html">KAGONG</a>
+            </div>
+        </header>
+        <form name="login" onsubmit="log_in()" action="in.php" method = "post">
+            <section class="login-input-section-wrap">
+                <div class="login-input-wrap">
+                    <input placeholder="이메일" name="email" id="email" type="email" maxlength="30" value=""></input>
+                </div>
+                <div class="login-input-wrap password-wrap">
+                    <input placeholder="비밀번호" name="pw" id="pw" type="password" maxlength="15" value=""></input>
+                </div>
+                <div class="login-button-wrap">
+                    <button type="submit">로그인</button>
+                </div>
+                <div class="click">
+                    <a href="index.html" style="margin-right:10px;">홈으로 돌아가기</a>
+                    <a href="signin.html">회원가입 하기</a>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+</body>
