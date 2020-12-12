@@ -60,6 +60,13 @@ $conn = mysqli_connect(
   'cagong');
 
 
+#작성한 리뷰 수정하는 부분 - 원본
+// $modified_review = "UPDATE review
+// SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+// WHERE reviewIdx = {$reviewIdx};";
+//
+//  if (!mysqli_query($conn,$sql)){
+// die('Error: ' . mysqli_error($conn)); }
 
 #작성한 리뷰 post 하는 부분 - 원본
 // $new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
@@ -70,38 +77,21 @@ $conn = mysqli_connect(
 // die('Error: ' . mysqli_error($conn)); }
 
 #작성한 리뷰 post 하는 부분 - 수정
+//$userIdx는 $cnt에 따라, $cafeIdx는 다시 봐야함.
 // 별점 계산
-if(!empty($_POST['rating'])){
-  $max = 0;
-  foreach($_POST['rating'] as $check){
-    if($max < $check) $max = $check;
-  }
-   $star_rate = $max;
-}
-$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
-VALUES
-('$_POST['reviewContent']', $currentUser, $index, '$_POST['price']', '$_POST['mood']', '$_POST['seat']', $star_rate);";
-
- if (!mysqli_query($conn,$sql)){
-die('Error: ' . mysqli_error($conn)); }
-
-
-#작성한 리뷰 수정하는 부분 - 원본
-$modified_review = "UPDATE review
-SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
-WHERE reviewIdx = {$reviewIdx};";
-
- if (!mysqli_query($conn,$sql)){
-die('Error: ' . mysqli_error($conn)); }
-
-#작성한 리뷰 수정하는 부분 - 원본
-// $modified_review = "UPDATE review
-// SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
-// WHERE reviewIdx = {$reviewIdx};";
+// if(!empty($_POST['rating'])){
+//   $max = 0;
+//   foreach($_POST['rating'] as $check){
+//     if($max < $check) $max = $check;
+//   }
+//    $star_rate = $max;
+// }
+// $new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
+// VALUES
+// ('$_POST['reviewContent']', $userIdx, $cafeIdx, '$_POST['price']', '$_POST['mood']', '$_POST['seat']', $star_rate);";
 //
 //  if (!mysqli_query($conn,$sql)){
 // die('Error: ' . mysqli_error($conn)); }
-
 
 #작성한 리뷰 삭제하는 부분
 
@@ -139,11 +129,6 @@ where c.cafeIdx = {$index};";
   $cnt = mysqli_query($conn, $sql1);
 
 
-
-
-
-
-
 #예전 코드
 // $review_number = 3;
 // $user_name = array("공시생", "mina98", "먹짱123");
@@ -157,6 +142,7 @@ where c.cafeIdx = {$index};";
 // "지금까지 잘 이용했는데 갑자기 가격을 올렸네요... 공사 중이라 그런지 너무 시끄럽고 어수선하기도 하고요... 앞으로는 잘 이용 안할 듯 합니다.",
 // "늘 다니던 독서실이 문을 닫아서 처음 방문했는데 좌석도 많고 가격도 합리적이여 좋았습니다. 다만 음악소리가  크고 소란스러워서 다소 어수선했습니다.");
 // $count=$review_number;
+
 ?>
 </head>
 <body>
@@ -237,7 +223,6 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 </p>
 <p class='comment'>".$comment."</p></td></tr>";
 
-
 // 수정 삭제 버튼 html
 $manage_review_html = "<span class='manage' style='float: right;'>
   <form action='edit_reivew.php'>
@@ -250,9 +235,12 @@ $manage_review_html = "<span class='manage' style='float: right;'>
   }
 //reviewIdx를 edit_review.php로 가져가고 싶은데 정보가 어떤 형식(변수)으로 주어진지 모르겠다.
 //edit_review.php로 reviewIdx를 가져가서, reivew 정보를 html에 업로드할 수 있게 하려함.
+
  mysqli_close($conn);
 
  echo $review_list_html;
+
+
 
  ?>
 
