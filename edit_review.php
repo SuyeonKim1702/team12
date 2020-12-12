@@ -13,7 +13,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
+<?php
+function submit_edit(){
+  #db 연결 부분
+  $conn = mysqli_connect(
+    '15.165.124.76',
+    'osp',
+    '1234',
+    'cagong');
 
+  $modified_review = "UPDATE review
+  SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+  WHERE reviewIdx = {$reviewIdx};";
+//변수 수정해야함 - 어떤식으로 db에 설정되어있는지 모르겠음
+   if (!mysqli_query($conn,$sql)){
+  die('Error: ' . mysqli_error($conn)); }
+}
+if(array_key_exists('edit', $_POST)){
+  submit_edit();
+}
+
+?>
 </head>
 
 <body>
@@ -80,7 +100,7 @@
                     <img src="/tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" id="reasonable" value="가격적당" checked>
+                    <input type="radio" name="price" id="reasonable" value="가격적당">
                     <img src="/tags/보통.png" height=30>
                   </label>
                   <label class="column">
@@ -95,7 +115,7 @@
                   <img src="/tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" id="normal" value="적당한" checked>
+                  <input type="radio" name="mood" id="normal" value="적당한">
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
@@ -110,7 +130,7 @@
                   <img src="/tags/적다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" id="average" value="좌석보통" checked>
+                  <input type="radio" name="seat" id="average" value="좌석보통">
                   <img src="/tags/보통.png" height=30>
                 </label>
                 <label class="column">
@@ -149,12 +169,13 @@
             </div>
 
             <div class="cmd">
+              <form class="btn_wrap" method="post">
+                <input class="button" type="submit" name="edit" id="edit" value="수정">
+              </form>
               <div class="btn_wrap">
-                <input class="button" type="submit" name="save" id="save" value="등록">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="review_list.php">
               </div>
-              <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
-              </div>
+              <!-- 수정하면 db에 업로드하고, 취소하면 이때까지 수정한 것은 db에 업로드 되지 않게 하려함 -->
             </div>
 
           </form>

@@ -9,6 +9,14 @@
 <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+<!-- 리뷰가 사용자 리뷰이면, 삭제 수정 버튼 나타나도록함-->
+<style>
+.manage{
+ <?if($currentUser==$row1["userIdx"]){?>
+   display:none;
+ <?}?>
+}
+</style>
 
 <?php
 
@@ -21,8 +29,8 @@ if(isset($_SESSION[ 'userIdx' ])){
 }
 
 //카페 인덱스
-$index = $_GET['cafeIdx']; 
-
+// $index = $_GET['cafeIdx'];
+$index = $_SESSION['cafeIdx'];
 
 
 $seat = [
@@ -53,7 +61,7 @@ $conn = mysqli_connect(
 
 
 
-#작성한 리뷰 post 하는 부분
+#작성한 리뷰 post 하는 부분 - 원본
 // $new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
 // VALUES
 // ('$reviewContent', $userIdx, $cafeIdx, $price, $mood, $seat, $totalRating);";
@@ -62,24 +70,31 @@ $conn = mysqli_connect(
 // die('Error: ' . mysqli_error($conn)); }
 
 #작성한 리뷰 post 하는 부분 - 수정
-//$userIdx는 $cnt에 따라, $cafeIdx는 다시 봐야함.
 // 별점 계산
-// if(!empty($_POST['rating'])){
-//   $max = 0;
-//   foreach($_POST['rating'] as $check){
-//     if($max < $check) $max = $check;
-//   }
-//    $star_rate = $max;
-// }
-// $new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
-// VALUES
-// ('$_POST['reviewContent']', $userIdx, $cafeIdx, '$_POST['price']', '$_POST['mood']', '$_POST['seat']', $star_rate);";
-//
-//  if (!mysqli_query($conn,$sql)){
-// die('Error: ' . mysqli_error($conn)); }
+if(!empty($_POST['rating'])){
+  $max = 0;
+  foreach($_POST['rating'] as $check){
+    if($max < $check) $max = $check;
+  }
+   $star_rate = $max;
+}
+$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
+VALUES
+('$_POST['reviewContent']', $currentUser, $index, '$_POST['price']', '$_POST['mood']', '$_POST['seat']', $star_rate);";
+
+ if (!mysqli_query($conn,$sql)){
+die('Error: ' . mysqli_error($conn)); }
 
 
-#작성한 리뷰 수정하는 부분
+#작성한 리뷰 수정하는 부분 - 원본
+$modified_review = "UPDATE review
+SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+WHERE reviewIdx = {$reviewIdx};";
+
+ if (!mysqli_query($conn,$sql)){
+die('Error: ' . mysqli_error($conn)); }
+
+#작성한 리뷰 수정하는 부분 - 원본
 // $modified_review = "UPDATE review
 // SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
 // WHERE reviewIdx = {$reviewIdx};";
@@ -130,18 +145,18 @@ where c.cafeIdx = {$index};";
 
 
 #예전 코드
-$review_number = 3;
-$user_name = array("공시생", "mina98", "먹짱123");
-$user_image = array("images/사용자이미지2.png", "images/사용자이미지1.png", "images/사용자이미지1.png");
-$upload_time = array("5일 전", "2일 전", "2시간 전");
-$score = array(4, 3, 4);
-$selectedtags = array(array("tags/붐비는.png", "tags/조용한.png", "tags/가격적당.png"),
-array("tags/좌석많은.png", "tags/소란스러운.png", "tags/가격비쌈.png"),
-array("tags/좌석많은.png","tags/소란스러운.png","tags/가격적당.png"));
-$comment = array("주말에 이용했더니 사람이 많아서 10분정도 대기했습니다..! 그래도 조용하 가격도 적당해서 잘 이용했어요 ㅎㅎ 공부하기 좋은 카페 추천합니다!!",
-"지금까지 잘 이용했는데 갑자기 가격을 올렸네요... 공사 중이라 그런지 너무 시끄럽고 어수선하기도 하고요... 앞으로는 잘 이용 안할 듯 합니다.",
-"늘 다니던 독서실이 문을 닫아서 처음 방문했는데 좌석도 많고 가격도 합리적이여 좋았습니다. 다만 음악소리가  크고 소란스러워서 다소 어수선했습니다.");
-$count=$review_number;
+// $review_number = 3;
+// $user_name = array("공시생", "mina98", "먹짱123");
+// $user_image = array("images/사용자이미지2.png", "images/사용자이미지1.png", "images/사용자이미지1.png");
+// $upload_time = array("5일 전", "2일 전", "2시간 전");
+// $score = array(4, 3, 4);
+// $selectedtags = array(array("tags/붐비는.png", "tags/조용한.png", "tags/가격적당.png"),
+// array("tags/좌석많은.png", "tags/소란스러운.png", "tags/가격비쌈.png"),
+// array("tags/좌석많은.png","tags/소란스러운.png","tags/가격적당.png"));
+// $comment = array("주말에 이용했더니 사람이 많아서 10분정도 대기했습니다..! 그래도 조용하 가격도 적당해서 잘 이용했어요 ㅎㅎ 공부하기 좋은 카페 추천합니다!!",
+// "지금까지 잘 이용했는데 갑자기 가격을 올렸네요... 공사 중이라 그런지 너무 시끄럽고 어수선하기도 하고요... 앞으로는 잘 이용 안할 듯 합니다.",
+// "늘 다니던 독서실이 문을 닫아서 처음 방문했는데 좌석도 많고 가격도 합리적이여 좋았습니다. 다만 음악소리가  크고 소란스러워서 다소 어수선했습니다.");
+// $count=$review_number;
 ?>
 </head>
 <body>
@@ -211,6 +226,7 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
  <p style='text-align:center;'>".$user_name."</p>
  </td> <td class='review_result'>
  <span class='upload_time'>".$upload_time."</span>
+ ".$manage_review_html."
  <p class='rating_result'>
    <font size=7>".$score."</font>
    <div>
@@ -221,24 +237,25 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 </p>
 <p class='comment'>".$comment."</p></td></tr>";
 
-// 리뷰가 사용자 리뷰이면, 조건 추가하기
-// 버튼 누르면 사용자 리뷰 데이터로 수정하기
-// $manage_review_html = "<span class='manage' style='float: right;'>
-//  <input type='button' class='button' value='수정' id='edit'>
-//  <input type='button' class='button' value='삭제' id='delete'>
-// </span>";
 
-
+// 수정 삭제 버튼 html
+$manage_review_html = "<span class='manage' style='float: right;'>
+  <form action='edit_reivew.php'>
+    <input type='submit' class='button' value='수정' id='edit'>
+    <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
+  </form>
+  <input class='button' value='삭제' id='delete'>
+</span>";
 
   }
-
+//reviewIdx를 edit_review.php로 가져가고 싶은데 정보가 어떤 형식(변수)으로 주어진지 모르겠다.
+//edit_review.php로 reviewIdx를 가져가서, reivew 정보를 html에 업로드할 수 있게 하려함.
  mysqli_close($conn);
 
  echo $review_list_html;
 
-
-
  ?>
+
           </table>
         </div>
     </main>
