@@ -142,7 +142,7 @@ $cafeRating = $row1['rating'];
               <i class="fas fa-star" style="color:#ffcc00; font-size: 1.2em;"></i>
               <span style="color:#3597DB; font-size: 1.2em"><?php echo $cafeRating ?></span>
               <span class="btn_wrap">
-                <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php'" value="리뷰쓰기" />
+                <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php?cafeIdx=<?php echo $index ?>'" value="리뷰쓰기" />
               </span>
             </article>
 

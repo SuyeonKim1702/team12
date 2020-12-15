@@ -15,7 +15,34 @@
 
 <?php
 
-function submit_edit(){
+
+
+
+$seat_ = [
+  1 => "좌석 적은",
+  2 => "좌석 적당",
+  3 => "좌석 많은",
+];
+
+$mood_ = [
+  1 => "소란스러운",
+  2 => "무난한 소음",
+  3 => "조용한",
+];
+
+$cost_ = [
+  1 => "가격비싼",
+  2 => "가격보통",
+  3 => "가격저렴",
+];
+
+
+
+
+$reviewIdx = $_GET['reviewIdx'];
+$cafeIdx = $_GET['cafeIdx'];
+$userIdx = $_GET['userIdx'];
+
   #db 연결 부분
   $conn = mysqli_connect(
     '15.165.124.76',
@@ -23,24 +50,41 @@ function submit_edit(){
     '1234',
     'cagong');
 
-  $modified_review = "UPDATE review
-  SET reviewContent = '{$reviewContent}', price = {$price}, mood = {$mood}, seat = {$seat}, totalRating = {$totalRating}
-  WHERE reviewIdx = {$reviewIdx};";
-//변수 수정해야함 - 어떤식으로 db에 설정되어있는지 모르겠음
-   if (!mysqli_query($conn,$sql)){
-  die('Error: ' . mysqli_error($conn)); }
-}
 
-if(array_key_exists('edit', $_POST)){
-  submit_edit();
-}
 
-$reviewIdx = $_POST['reviewIdx']; // hidden 값으로 받은 reivewIdx
-// reviewIdx로 데이터 베이스에서 리뷰에 대한 정보를 가져와서 변수에 넣어주세요.
-// $cost;
-// $mood;
-// $seat;
-// $totalRating;
+
+  #리뷰 리스트 가져오는 부분 c.cafeIdx는 카페인덱스마다 바뀌어야 함
+  $sql = "SELECT reviewIdx, reviewContent, price, mood, seat, totalRating
+FROM review
+where reviewIdx = {$reviewIdx};";
+
+  $result = mysqli_query($conn, $sql);
+
+  while($row1 = mysqli_fetch_assoc($result)){
+   $reviewContent = $row1['reviewContent'];
+   $price = $cost_[$row1['price']];
+   $mood = $mood_[$row1['mood']];
+   $seat = $seat_[$row1['seat']];
+   $totalRating = $row1['totalRating'];
+    
+
+  }
+
+  $info ="SELECT cafename
+  from cafe
+  where cafeIdx = {$cafeIdx};";
+
+$result = mysqli_query($conn, $info);
+
+while($row1 = mysqli_fetch_assoc($result)){
+ $cafe_name = $row1['cafename'];
+   
+
+ }
+
+
+
+
 
 ?>
 <!-- 페이지 로딩 시 별점 초기화 -->
@@ -60,11 +104,11 @@ window.onload = function(){
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
                     <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
+                        <li><a href="login.php">로그인</a></li>
+                        <li><a href="signin.html">회원가입</a></li>
                     </ul>
                 </nav>
                 <div class="main-content">
@@ -89,12 +133,12 @@ window.onload = function(){
 
         <div class="bottom-container">
 
-          <form name="reviewform" class="reviewform" method="post" action="review_list.php">
-            <input type="hidden" name="id" value="review">
+        <form name="reviewform" class="reviewform" method="post" action="modify_review.php?cafeIdx=<?php echo $cafeIdx?> ">
+            <input type="hidden" name="reviewIdx" value="<?=  $reviewIdx ?>">
             <!-- 카페 정보창에서 db에서 찾은 cafe idx를 write_review 창에 넘겨준 값-->
-            <input type="hidden" name="cafeIdx" value="<?=  $_SESSION['cafeIdx'] ?>">
+            <input type="hidden" name="cafeIdx" value="<?=  $cafeIdx ?>">
             <!-- 로그인 시 설정된 User idx를 넘겨받음 -->
-            <input type="hidden" name="userIdx" value="<?= $_SESSION['userIdx'] ?>">
+            <input type="hidden" name="userIdx" value="<?= $userIdx?>">
 
             <br><br>
             <h3>
@@ -103,28 +147,23 @@ window.onload = function(){
               ?>
             </h3>
             <br>
-            <?php
-              $price= $row['price'];
-              echo ($signi== 'Yes') ?  "checked" : "" ;
-
-            ?>
-
+           
             <table class="review_tags">
               <tr><div id="review_tag1">
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
                     <input type="radio" name="price" id="cheap" value="가격저렴"
-                    <?php echo ($cost == 1) ?  "checked" : "" ;  ?>>
+                    <?php echo ($price == 1) ?  "checked" : "" ;  ?>>
                     <img src="./tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="reasonable" value="가격적당"
-                    <?php echo ($cost == 2) ?  "checked" : "" ;  ?>>
+                    <?php echo ($price == 2) ?  "checked" : "" ;  ?>>
                     <img src="./tags/보통.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="expensive" value="가격비쌈"
-                    <?php echo ($cost == 3) ?  "checked" : "" ;  ?>>
+                    <?php echo ($price == 3) ?  "checked" : "" ;  ?>>
                     <img src="./tags/비싸다.png" height=30>
                   </label></td>
               </div></tr>
