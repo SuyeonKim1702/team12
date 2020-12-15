@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Write or Edit a Review</title>
+<title>Write a Review</title>
 <link rel="stylesheet" href="review.css" type = "text/css">
 <link rel="stylesheet" href="button.css" type = "text/css">
 <script type="text/javascript" src="write_review.js"></script>
@@ -180,9 +180,9 @@ $cafe_name = $row1['cafename'];
 
             <br>
 
-            <div class="review_contents" name="reviewContent">
+            <div name="reviewContent">
                 <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"></textarea></p>
+                <p><textarea class="review_contents" name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"></textarea></p>
             </div>
 
             <div class="cmd">

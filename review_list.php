@@ -260,9 +260,9 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
  <p class='rating_result'>
    <font size=7>".$score."</font>
    <div>
-   <div class='tag_result'><input type='button' value='".$seat[$row1["seat"]]."'></div>
-   <div class='tag_result'><input type='button' value='".$mood[$row1["mood"]]."'></div>
-   <div class='tag_result'><input type='button' value='".$cost[$row1["price"]]."'></div>
+   <span class='tag_result'><input type='button' value='".$seat[$row1["seat"]]."'></span>
+   <span class='tag_result'><input type='button' value='".$mood[$row1["mood"]]."'></span>
+   <span class='tag_result'><input type='button' value='".$cost[$row1["price"]]."'></span>
    </div>
 </p>
 <p class='comment'>".$comment."</p></td></tr>";
