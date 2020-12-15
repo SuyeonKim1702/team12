@@ -18,9 +18,6 @@
 
 <body>
 
-<!-- https://stackoverflow.com/questions/17541614/use-images-instead-of-radio-buttons -->
-<!-- https://blogpack.tistory.com/695 -->
-
 <div>
     <main class="pg-main">
         <div class = "top-container" >
@@ -77,45 +74,45 @@
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
                     <input type="radio" name="price" id="cheap" value="가격저렴">
-                    <img src="/tags/저렴하다.png" height=30>
+                    <img src="./tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="reasonable" value="가격적당" checked>
-                    <img src="/tags/보통.png" height=30>
+                    <img src="./tags/보통.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="expensive" value="가격비쌈">
-                    <img src="/tags/비싸다.png" height=30>
+                    <img src="./tags/비싸다.png" height=30>
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
                   <input type="radio" name="mood" id="quiet" value="조용한">
-                  <img src="/tags/조용하다.png" height=30>
+                  <img src="./tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="normal" value="적당한" checked>
-                  <img src="/tags/보통.png" height=30>
+                  <img src="./tags/보통.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="noisy" value="소란스러운">
-                  <img src="/tags/소란스럽다.png" height=30>
+                  <img src="./tags/소란스럽다.png" height=30>
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
                 <td><label class="category" for="seat">좌석 갯수</label></td>
                 <td><label class="column">
                   <input type="radio" name="seat" id="few" value="붐비는">
-                  <img src="/tags/적다.png" height=30>
+                  <img src="./tags/적다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="average" value="좌석보통" checked>
-                  <img src="/tags/보통.png" height=30>
+                  <img src="./tags/보통.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="many" value="좌석많은">
-                  <img src="/tags/많다.png" height=30>
+                  <img src="./tags/많다.png" height=30>
                 </label></td>
               </div></tr>
             </table>

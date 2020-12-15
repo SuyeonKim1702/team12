@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 <?php
+
 function submit_edit(){
   #db 연결 부분
   $conn = mysqli_connect(
@@ -23,23 +24,34 @@ function submit_edit(){
     'cagong');
 
   $modified_review = "UPDATE review
-  SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+  SET reviewContent = '{$reviewContent}', price = {$price}, mood = {$mood}, seat = {$seat}, totalRating = {$totalRating}
   WHERE reviewIdx = {$reviewIdx};";
 //변수 수정해야함 - 어떤식으로 db에 설정되어있는지 모르겠음
    if (!mysqli_query($conn,$sql)){
   die('Error: ' . mysqli_error($conn)); }
 }
+
 if(array_key_exists('edit', $_POST)){
   submit_edit();
 }
 
+$reviewIdx = $_POST['reviewIdx']; // hidden 값으로 받은 reivewIdx
+// reviewIdx로 데이터 베이스에서 리뷰에 대한 정보를 가져와서 변수에 넣어주세요.
+// $cost;
+// $mood;
+// $seat;
+// $totalRating;
+
 ?>
+<!-- 페이지 로딩 시 별점 초기화 -->
+<!-- <script>
+window.onload = function(){
+    new Rating().setRate("<? echo $totalRating; ?>");
+}
+</script> -->
 </head>
 
 <body>
-
-<!-- https://stackoverflow.com/questions/17541614/use-images-instead-of-radio-buttons -->
-<!-- https://blogpack.tistory.com/695 -->
 
 <div>
     <main class="pg-main">
@@ -91,51 +103,65 @@ if(array_key_exists('edit', $_POST)){
               ?>
             </h3>
             <br>
+            <?php
+              $price= $row['price'];
+              echo ($signi== 'Yes') ?  "checked" : "" ;
+
+            ?>
 
             <table class="review_tags">
               <tr><div id="review_tag1">
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
-                    <input type="radio" name="price" id="cheap" value="가격저렴">
-                    <img src="/tags/저렴하다.png" height=30>
+                    <input type="radio" name="price" id="cheap" value="가격저렴"
+                    <?php echo ($cost == 1) ?  "checked" : "" ;  ?>>
+                    <img src="./tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" id="reasonable" value="가격적당">
-                    <img src="/tags/보통.png" height=30>
+                    <input type="radio" name="price" id="reasonable" value="가격적당"
+                    <?php echo ($cost == 2) ?  "checked" : "" ;  ?>>
+                    <img src="./tags/보통.png" height=30>
                   </label>
                   <label class="column">
-                    <input type="radio" name="price" id="expensive" value="가격비쌈">
-                    <img src="/tags/비싸다.png" height=30>
+                    <input type="radio" name="price" id="expensive" value="가격비쌈"
+                    <?php echo ($cost == 3) ?  "checked" : "" ;  ?>>
+                    <img src="./tags/비싸다.png" height=30>
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
-                  <input type="radio" name="mood" id="quiet" value="조용한">
-                  <img src="/tags/조용하다.png" height=30>
+                  <input type="radio" name="mood" id="quiet" value="조용한"
+                  <?php echo ($mood == 3) ?  "checked" : "" ;  ?>>
+                  <img src="./tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" id="normal" value="적당한">
-                  <img src="/tags/보통.png" height=30>
+                  <input type="radio" name="mood" id="normal" value="적당한"
+                  <?php echo ($mood == 2) ?  "checked" : "" ;  ?>>
+                  <img src="./tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="mood" id="noisy" value="소란스러운">
-                  <img src="/tags/소란스럽다.png" height=30>
+                  <input type="radio" name="mood" id="noisy" value="소란스러운"
+                  <?php echo ($mood == 1) ?  "checked" : "" ;  ?>>
+                  <img src="./tags/소란스럽다.png" height=30>
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
                 <td><label class="category" for="seat">좌석 갯수</label></td>
                 <td><label class="column">
-                  <input type="radio" name="seat" id="few" value="붐비는">
-                  <img src="/tags/적다.png" height=30>
+                  <input type="radio" name="seat" id="few" value="붐비는"
+                  <?php echo ($seat == 1) ?  "checked" : "" ;  ?>>
+                  <img src="./tags/적다.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" id="average" value="좌석보통">
-                  <img src="/tags/보통.png" height=30>
+                  <input type="radio" name="seat" id="average" value="좌석보통"
+                  <?php echo ($seat == 2) ?  "checked" : "" ;  ?>>
+                  <img src="./tags/보통.png" height=30>
                 </label>
                 <label class="column">
-                  <input type="radio" name="seat" id="many" value="좌석많은">
-                  <img src="/tags/많다.png" height=30>
+                  <input type="radio" name="seat" id="many" value="좌석많은"
+                  <?php echo ($seat == 3) ?  "checked" : "" ;  ?>>
+                  <img src="./tags/많다.png" height=30>
                 </label></td>
               </div></tr>
             </table>
@@ -173,7 +199,7 @@ if(array_key_exists('edit', $_POST)){
                 <input class="button" type="submit" name="edit" id="edit" value="수정">
               </form>
               <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="review_list.php">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="location.href='review_list.php'">
               </div>
               <!-- 수정하면 db에 업로드하고, 취소하면 이때까지 수정한 것은 db에 업로드 되지 않게 하려함 -->
             </div>

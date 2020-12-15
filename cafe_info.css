@@ -1,4 +1,3 @@
-
 .bottom-container2{
 
   max-width: 1000px;
@@ -43,7 +42,7 @@
   margin: 20px 0px;
   padding: 20px;
   background: #F3F1FA;
-  line-height:20px; 
+  line-height:20px;
 }
 
 
@@ -84,9 +83,10 @@ article .cafe_name{
   font-size: 1.7em;
 }
 
-.info_tags img{
+.info_tags .tags{
     height: 30px;
     margin-top: 2px;
+    margin-right: 5px;
 }
 .info_tags{
   margin-top: 20px;
