@@ -24,9 +24,39 @@
   /* cursor: pointer; */
   outline: none;
 }
+
+
+.tag_result{
+  position: relative;
+  left: 50px;
+  margin-right: 10px;
+}
+
+.tag_result .button{
+  position: relative;
+  left: 50px;
+  margin-right: 10px;
+  width: auto;
+  height: 30px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #437FB4;
+  border: none;
+  border-radius: 45px;
+  /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+  /* transition: all 0.3s ease 0s; */
+  /* cursor: pointer; */
+  outline: none;
+}
+
 .info_tags .tags{
   margin-top: 10px;
 }
+
 .cafe_box2 input{
   margin: 3px;
 }
