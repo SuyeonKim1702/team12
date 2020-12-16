@@ -6,7 +6,6 @@
 <title>List of Reviews</title>
 <link rel = "stylesheet" href="review.css" type = "text/css">
 <link rel = "stylesheet" href="button.css" type = "text/css">
-<link rel = "stylesheet" href="tag.css" type = "text/css">
 <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -25,7 +24,7 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우
 $currentUser = $_SESSION['userIdx'];
 $top = '<ul class="nav-menu">
-<li><a href="login.html">로그아웃</a></li>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>';
 }else{
   //로그인 안 되어있을 경우
@@ -166,7 +165,7 @@ $path='delete_review.php?cafeIdx='.$index.'&&reviewIdx='.$reviewIdx;
 // 수정 삭제 버튼 html
 
 if($currentUser == $writer ){
-  $manage_review_html = "<span class='manage'>
+  $manage_review_html = "<span class='manage' style='float: right;'>
   <form method='get' action='edit_review.php'>
     <input type='submit' class='button' value='수정' id='edit'>
     <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
@@ -178,7 +177,7 @@ if($currentUser == $writer ){
   <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
   <input type='hidden' name='userIdx' value=".$currentUser.">
   <input type='hidden' name='cafeIdx' value=".$index.">
-  </form>
+</form>
 
 </span>";
 }else{
@@ -194,12 +193,14 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
  </td> <td class='review_result'><p>
  <span class='upload_time'>".$upload_time."</span>
  ".$manage_review_html."</p>
- <p>
+ <p >
     <span class='rating_result'><i class='fas fa-star' style='font-size:1.75em'></i>
     <font size=7>".$score."</font></span>
-    <span class='tag_result'><input class='button' type='button' value='".$seat[$row1["seat"]]."'></span>
-    <span class='tag_result'><input class='button' type='button' value='".$mood[$row1["mood"]]."'></span>
-    <span class='tag_result'><input class='button' type='button' value='".$cost[$row1["price"]]."'></span>
+    <div>
+    <span class='tag_result'><input type='button' value='".$seat[$row1["seat"]]."'></span>
+    <span class='tag_result'><input type='button' value='".$mood[$row1["mood"]]."'></span>
+    <span class='tag_result'><input type='button' value='".$cost[$row1["price"]]."'></span>
+    </div>
 </p>
 <p class='comment'>".$comment."</p></td></tr>";
 

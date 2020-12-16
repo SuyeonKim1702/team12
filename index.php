@@ -97,7 +97,7 @@ while($row1 = mysqli_fetch_assoc($result)){
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="index.html">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
                    <?php echo $top ?>
                 </nav>
