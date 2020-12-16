@@ -27,6 +27,8 @@ console.log("시행됨");
 
 
 
+
+
 for(var i = 0;i<listData.length;i++) {
     if(listData[i].seatStat == '만석'){
         var markerImage = new kakao.maps.MarkerImage('./images/marker_red.png', new kakao.maps.Size(37,37));
