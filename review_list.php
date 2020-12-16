@@ -6,6 +6,7 @@
 <title>List of Reviews</title>
 <link rel = "stylesheet" href="review.css" type = "text/css">
 <link rel = "stylesheet" href="button.css" type = "text/css">
+<link rel = "stylesheet" href="tag.css" type = "text/css">
 <script src="https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -134,6 +135,7 @@ where c.cafeIdx = {$index};";
             </div>
         </div>
         <div class="bottom-container">
+          <br>
           <h2>
           <?php echo mysqli_fetch_assoc($cnt)['count']."건의 방문자 평가";?>
             <span class="btn_wrap">
@@ -165,19 +167,19 @@ $path='delete_review.php?cafeIdx='.$index.'&&reviewIdx='.$reviewIdx;
 // 수정 삭제 버튼 html
 
 if($currentUser == $writer ){
-  $manage_review_html = "<span class='manage' style='float: right;'>
+  $manage_review_html = "<span class='manage'>
   <form method='get' action='edit_review.php'>
-    <input type='submit' class='button' value='수정' id='edit'>
+    <input type='submit' class='button' id='edit_btn' value='수정'>
     <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
     <input type='hidden' name='userIdx' value=".$currentUser.">
   <input type='hidden' name='cafeIdx' value=".$index.">
   </form>
   <form action='delete_review.php'>
-  <input type='submit' class='button' value='삭제' id='delete'>
+  <input type='submit' class='button' id='delete_btn' value='삭제'>
   <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
   <input type='hidden' name='userIdx' value=".$currentUser.">
   <input type='hidden' name='cafeIdx' value=".$index.">
-</form>
+  </form>
 
 </span>";
 }else{
@@ -193,14 +195,12 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
  </td> <td class='review_result'><p>
  <span class='upload_time'>".$upload_time."</span>
  ".$manage_review_html."</p>
- <p >
+ <p>
     <span class='rating_result'><i class='fas fa-star' style='font-size:1.75em'></i>
     <font size=7>".$score."</font></span>
-    <div>
-    <span class='tag_result'><input type='button' value='".$seat[$row1["seat"]]."'></span>
-    <span class='tag_result'><input type='button' value='".$mood[$row1["mood"]]."'></span>
-    <span class='tag_result'><input type='button' value='".$cost[$row1["price"]]."'></span>
-    </div>
+    <span class='tag_result'><input class='button' type='button' value='".$seat[$row1["seat"]]."'></span>
+    <span class='tag_result'><input class='button' type='button' value='".$mood[$row1["mood"]]."'></span>
+    <span class='tag_result'><input class='button' type='button' value='".$cost[$row1["price"]]."'></span>
 </p>
 <p class='comment'>".$comment."</p></td></tr>";
 

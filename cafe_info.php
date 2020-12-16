@@ -150,11 +150,11 @@ $cafeRating = $row1['rating'];
 
 
           <section id="main_section">
-            <?$cafe_rating = sprintf('%0.1f', $cafeRating);?>
+            <? $cafe_rating = sprintf('%0.1f', $cafeRating);?>
             <article>
-              <span class="cafe_name"><?php echo $cafeName ?></span>
+              <span class="cafe_name"><?php echo $cafeName; ?></span>
               <i class="fas fa-star" style="color:#ffcc00; font-size: 1.2em;"></i>
-              <span style="color:#3597DB; font-size: 1.2em"><?php echo $cafe_rating ?></span>
+              <span style="color:#3597DB; font-size: 1.2em"><?php echo $cafe_rating; ?></span>
               <span class="btn_wrap">
                 <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php?cafeIdx=<?php echo $index ?>'" value="리뷰쓰기" />
               </span>
@@ -199,7 +199,7 @@ $cafeRating = $row1['rating'];
                 <input type="button" class="button" id="seatstatus_btn" onclick = "writeStatus();" value="좌석 정보 수정"/>
               </div>
             </div>
-            <form class="set_seat" method="POST" action= <?php echo $path ?> name="setSeat" id="seat-box" style="display:none">
+            <form class="set_seat" method="POST" action= "<?php echo $path; ?>" name="setSeat" id="seat-box" style="display:none">
               <p>현재 카페의 자리 수는 어떤가요?</p>
               <p>
                 <input type="radio" id="seat1" name="radio-group" checked>
