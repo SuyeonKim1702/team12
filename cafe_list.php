@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
 <title>List of Cafes</title>
 <link rel ="stylesheet" href ="review.css" type = "text/css">
 <link rel = "stylesheet" href ="cafe_list.css" type = "text/css">
@@ -74,28 +70,8 @@ $conn = mysqli_connect(
 $j = 0;
 $location = array();
 while($row1 = mysqli_fetch_assoc($result) and $j < 40){
-<<<<<<< HEAD
-  $j = $j +1;
-  $cafeidx = $row1['cafeIdx'];
-  $cafeName = $row1['cafename'];
-  $seat = $row1['availableSeat'];
-
-  //x -> 위도, y -> 경도
-  $x = $row1['x'];
-  $y = $row1['y'];
 
 
-  array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
-
-
-  $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
-  from hashtagList
-  join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
-  where cafeIdx={$cafeidx}
-  group by h.hashtagIdx;";
-
-
-=======
 $j = $j +1;
 $cafeidx = $row1['cafeIdx'];
 $cafeName = $row1['cafename'];
@@ -108,7 +84,7 @@ $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
 from hashtagList
 join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
 where cafeIdx={$cafeidx};";
->>>>>>> bf651ce210f3ad8a3d5de9be836e9b275ab66fc9
+
 $result2 = mysqli_query($conn, $hashtag);
 $i = 0;
 $tags = "";
