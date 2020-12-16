@@ -95,7 +95,7 @@ $cafeRating = $row1['rating'];
   <title>Details about Cafe</title>
   <link rel= "stylesheet" href="review.css" type = "text/css">
   <link rel= "stylesheet" href="button.css" type = "text/css">
-  <link rel = "stylesheet" href="tag.css" type="text/css">
+  <link rel = "stylesheet" href="tag.php" type="text/css">
   <link rel= "stylesheet" href="cafe_info.css" type = "text/css">
   <script src= "https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
   <link rel= "preconnect" href = "https://fonts.gstatic.com">

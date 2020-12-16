@@ -150,7 +150,7 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   $y = $row1['y'];
 
 
-  array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
+  array_push($location, '{x:'.$x.', y:'.$y.', cafeName:"'.$cafeName.'", seat:'.$seat.'}');
 
 
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
@@ -170,17 +170,9 @@ while($row = mysqli_fetch_assoc($result2) and $i<5){
   $i = $i+1;
 }
 
-//좌석에 따라 색깔 정하기
-if($seat==0){
-  $seat_tag_color = "red";
-}
-else if ($seat<=10) {
-  $seat_tag_color = "green";
-}
-else{
-  $seat_tag_color = "yellow";
-}
 
+
+  $seat_tag_color; //좌석에 따라 색깔 정하기
   $path=$cafeidx;
 
   $data=$data.' <table class="cafe_box" onclick="location.href=\'cafe_info.php?cafeIdx='.$path.'\'">
@@ -196,6 +188,7 @@ else{
 
       </span>
       <div class="seat_status">
+          // 배경색도 값에 따라 다르게 설정
           <input type="button" class="seat_info_tag" name="seat_info_tag" value="'.$seat.'석" style="background-color:'.$seat_tag_color.'"></input>
       </div>
     </td>
@@ -208,7 +201,7 @@ else{
 
 echo $data;
 
-
+echo json_encode($location);
 
           ?>
           <script type="text/javascript">
