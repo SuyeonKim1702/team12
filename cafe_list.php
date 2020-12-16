@@ -150,7 +150,7 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   $y = $row1['y'];
 
 
-  array_push($location, '{x:'.$x.', y:'.$y.', cafeName:"'.$cafeName.'", seat:'.$seat.'}');
+  array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
 
 
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
@@ -174,7 +174,7 @@ while($row = mysqli_fetch_assoc($result2) and $i<5){
 if($seat==0){
   $seat_tag_color = "red";
 }
-elseif ($seat<=10) {
+else if ($seat<=10) {
   $seat_tag_color = "green";
 }
 else{
