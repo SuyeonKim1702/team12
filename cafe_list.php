@@ -110,7 +110,8 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
   from hashtagList
   join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
-  where cafeIdx={$cafeidx};";
+  where cafeIdx={$cafeidx}
+  group by h.hashtagIdx;";
 
 
 $result2 = mysqli_query($conn, $hashtag);

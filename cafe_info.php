@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우
 $top = '<ul class="nav-menu">
-<li><a href="login.html">로그아웃</a></li>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>';
 
 }else{
@@ -49,7 +49,8 @@ function phone_number_format($number)
     $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
     from hashtagList
     join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
-    where cafeIdx={$index};";
+    where cafeIdx ={$index}
+    group by h.hashtagIdx;";
 
     $avg_rating = "SELECT AVG(totalRating) as rating
     from review

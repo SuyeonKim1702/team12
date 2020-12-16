@@ -125,45 +125,45 @@ $cafe_name = $row1['cafename'];
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
                     <input type="radio" name="price" id="cheap" value="가격저렴">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%8C%E1%85%A5%E1%84%85%E1%85%A7%E1%86%B7%E1%84%92%E1%85%A1%E1%84%83%E1%85%A1.png?alt=media&token=39ce328b-aa9a-4833-844f-3f6e28fb44dd" height=30>
+                    <img src="./tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="reasonable" value="가격적당" checked>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%87%E1%85%A9%E1%84%90%E1%85%A9%E1%86%BC.png?alt=media&token=3fa38aff-fa0f-443e-9846-ebee9d8d1e73" height=30>
+                    <img src="./tags/보통.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="expensive" value="가격비쌈">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%87%E1%85%B5%E1%84%8A%E1%85%A1%E1%84%83%E1%85%A1.png?alt=media&token=f6842f18-efe7-4996-88e0-36458ce6a26c" height=30>
+                    <img src="./tags/비싸다.png" height=30>
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
                   <input type="radio" name="mood" id="quiet" value="조용한">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%8C%E1%85%A9%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%83%E1%85%A1.png?alt=media&token=d91041c5-c6cf-4b8e-848b-ddc9605acc81" height=30>
+                  <img src="./tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="normal" value="적당한" checked>
-                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%87%E1%85%A9%E1%84%90%E1%85%A9%E1%86%BC.png?alt=media&token=3fa38aff-fa0f-443e-9846-ebee9d8d1e73" height=30>
+                  <img src="./tags/보통.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="noisy" value="소란스러운">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%89%E1%85%A9%E1%84%85%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B3%E1%84%85%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A1.png?alt=media&token=5846d3b3-ed2f-482d-9e35-d0333962130d" height=30>
+                  <img src="./tags/소란스럽다.png" height=30>
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
                 <td><label class="category" for="seat">좌석 갯수</label></td>
                 <td><label class="column">
                   <input type="radio" name="seat" id="few" value="붐비는">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%8C%E1%85%A5%E1%86%A8%E1%84%83%E1%85%A1.png?alt=media&token=ae720f8f-2e51-4a42-8003-fe047860c168" height=30>
+                  <img src="./tags/적다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="average" value="좌석보통" checked>
-                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%87%E1%85%A9%E1%84%90%E1%85%A9%E1%86%BC.png?alt=media&token=3fa38aff-fa0f-443e-9846-ebee9d8d1e73" height=30>
+                  <img src="./tags/보통.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="many" value="좌석많은">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%86%E1%85%A1%E1%86%AD%E1%84%83%E1%85%A1.png?alt=media&token=bf6a3b40-940c-4a36-a51b-437afcfbc261" height=30>
+                  <img src="https://ifh.cc/g/81B96w.png" height=30>
                 </label></td>
               </div></tr>
             </table>
