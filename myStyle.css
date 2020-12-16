@@ -6,7 +6,7 @@ body{
     margin-bottom:20px;
 }
 .top-container{
-    background-image : url('mainimg.png') ;
+    background-image : url('./images/mainimg.png') ;
     background-repeat : no-repeat;
     background-size : cover;
     background-position : center center;
@@ -191,4 +191,18 @@ input[type='checkbox'] + label {
 input[type='checkbox']:checked + label {
   box-shadow:-1px -1px grey;
   background-color:#f78d32;
+}
+
+.custom {
+    margin:2px;
+    position:relative;
+
+    align-items: center;
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+    padding:8px 0px 8px 0px;
+    border-radius:6px;
+
+
 }
