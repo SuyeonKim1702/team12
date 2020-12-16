@@ -175,7 +175,7 @@ function unknown(){
         <div class="bottom-container2">
           <h1>지도</h1>
           <!-- 검색된 카페 리스트 -->
-          <br><br>
+          
           <div class="d">
                 <div id="map" style="width:1250px;height:450px;"></div>
 
@@ -260,6 +260,8 @@ for (var i = 0; i < listData.length; i++) {
 
 
             </div>
+
+            <br><br>
             <div class="cafe-container"> <?php echo $data; ?>
           <script type="text/javascript">
            var a = <?php echo json_encode($location);?>;
