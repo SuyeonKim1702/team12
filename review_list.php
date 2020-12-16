@@ -128,7 +128,7 @@ where c.cafeIdx = {$index};";
             <div>
                 <nav class = "nav_cafe">
                     <a href="/team12/cafe_list.php">검색 결과</a>
-                    <a href="/team12/cafe_info.php?cafeIdx=<?echo $index ?>">카페 정보</a>
+                    <a href="/team12/cafe_info.php?cafeIdx=<?php echo $index ?>">카페 정보</a>
                     <a href="#">리뷰 목록</a>
                 </nav>
             </div>
