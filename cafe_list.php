@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
 <title>List of Cafes</title>
 <link rel ="stylesheet" href ="review.css" type = "text/css">
 <link rel = "stylesheet" href ="cafe_list.css" type = "text/css">
