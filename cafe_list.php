@@ -6,13 +6,26 @@
 <link rel ="stylesheet" href ="review.css" type = "text/css">
 <link rel = "stylesheet" href ="cafe_list.css" type = "text/css">
 
-<link rel = "stylesheet" href="tag.php" type="text/css">
+<link rel = "stylesheet" href="tag.css" type="text/css">
 <script src= "https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
 <link rel= "preconnect" href="https://fonts.gstatic.com">
 <link href= "https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 <?php
 
 session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+
+}else{
+    $top = '<ul class="nav-menu">
+<li><a href="login.html">로그인</a></li>
+<li><a href="signin.html">회원가입</a></li>
+</ul>';
+
+}
 
 
 $conn = mysqli_connect(
@@ -21,11 +34,27 @@ $conn = mysqli_connect(
   '1234',
   'cagong');
 
-$string = $_POST['markers'];
-$string = str_replace ("[", "(", $string);
-$string = str_replace ("]", ")", $string);
 
-$keyword = $_POST['cafeName'];
+
+if(!isset($_POST['status'])){
+  //네비게이션 바에서 넘어옴
+  $keyword = $_SESSION['keyword'];
+  $string = $_SESSION['string'];
+
+
+}else{
+  //검색해서 넘어옴
+  $keyword = $_POST['cafeName'];
+  $string = $_POST['markers'];
+  $string = str_replace ("[", "(", $string);
+  $string = str_replace ("]", ")", $string);
+
+  $_SESSION['keyword'] = $keyword;
+  $_SESSION['string'] = $string;
+
+}
+
+
 if(strlen($keyword) == 0){
   if(strlen($string)>2){
     $cafelist = "SELECT c.cafeIdx as cafeIdx, distance, c.cafename as cafename, x, y, availableSeat, count(hashtagIdx) as count from hashtagList
@@ -33,27 +62,26 @@ if(strlen($keyword) == 0){
     where hashtagIdx IN ".$string."
     group by c.cafeIdx
     order by count DESC, distance;";
-  
+
   }else{
     $cafelist="";
   }
-  
 
-  
+
   //태그로 검색
-}else{ 
+}else{
   //카페 이름으로 검색
   $cafelist = "SELECT cafeIdx, cafename, availableSeat, x, y  FROM cafe WHERE cafename LIKE '%".$keyword."%' order by distance;";
-  
+
 }
 
-
-
-
-
-
-
 ?>
+
+<script>
+  $('.unknown').bind('click', function(){
+    alert("카페를 선택해주세요.");
+  });
+</script>
 </head>
 
 <body>
@@ -65,12 +93,9 @@ if(strlen($keyword) == 0){
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content" >
                     <div class="title">
@@ -85,9 +110,10 @@ if(strlen($keyword) == 0){
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="/">카페 정보</a>
-                    <a href="/">리뷰 목록</a>
+                    <a href="#">검색 결과</a>
+                    <a class='unknown'>카페 정보</a>
+                    <a class='unknown'>리뷰 목록</a>
+
                 </nav>
             </div>
         </div>
@@ -97,7 +123,7 @@ if(strlen($keyword) == 0){
           <div class="cafe-container">
 
 
-         
+
  <?php
  $conn = mysqli_connect(
   '15.165.124.76',
@@ -108,8 +134,11 @@ if(strlen($keyword) == 0){
           $data="";
           $result = mysqli_query($conn, $cafelist);
 
-          
+
 $j = 0;
+
+$location = array();
+
 while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   $j = $j +1;
   $cafeidx = $row1['cafeIdx'];
@@ -119,7 +148,10 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   //x -> 위도, y -> 경도
   $x = $row1['x'];
   $y = $row1['y'];
-  
+
+
+  array_push($location, '{x:'.$x.', y:'.$y.', cafeName:"'.$cafeName.'", seat:'.$seat.'}');
+
 
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
   from hashtagList
@@ -134,16 +166,15 @@ $tags = "";
 while($row = mysqli_fetch_assoc($result2) and $i<5){
 
 
-  $tags = $tags.'<p><input type="button" class="tags" name="tags" value="#'.$row['hashtagName'].'"></input> </p>';
+  $tags = $tags.'<input type="button" class="tags" name="tags" value="#'.$row['hashtagName'].'"></input><br>';
   $i = $i+1;
 }
 
 
 
-
-
+  $seat_tag_color; //좌석에 따라 색깔 정하기
   $path=$cafeidx;
-  
+
   $data=$data.' <table class="cafe_box" onclick="location.href=\'cafe_info.php?cafeIdx='.$path.'\'">
   <tr>
     <td class="cafe_box1">
@@ -153,13 +184,12 @@ while($row = mysqli_fetch_assoc($result2) and $i<5){
       <label class="cafe_name">'.$cafeName.'<label>
     </td>
     <td class="cafe_box2">
-      <div class="cafe_tags">'.$tags.'
-      
-      </div>
+      <span class="cafe_tags">'.$tags.'
+
+      </span>
       <div class="seat_status">
-        <p>
-          <input type="button" class="seat_info_tag" name="seat_info_tag" value="'.$seat.'석"></input>
-        </p>
+          // 배경색도 값에 따라 다르게 설정
+          <input type="button" class="seat_info_tag" name="seat_info_tag" value="'.$seat.'석" style="background-color:'.$seat_tag_color.'"></input>
       </div>
     </td>
   </tr>
@@ -167,12 +197,24 @@ while($row = mysqli_fetch_assoc($result2) and $i<5){
 
 }
 
-           
+
 
 echo $data;
-          ?>
 
-          
+echo json_encode($location);
+
+          ?>
+          <script type="text/javascript">
+           var a = <?php echo json_encode($location);?>;
+
+
+              console.log(a);
+
+
+          </script>
+
+
+
 
           </div>
           <!-- 구현해야하는 부분: 좌석 입력하면 버튼 변화-->

@@ -16,25 +16,21 @@
 <?php
 
 
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+}else{
+  //로그인 안 되어있을 경우
+  $top = '<ul class="nav-menu">
+  <li><a href="login.html">로그인</a></li>
+  <li><a href="signin.html">회원가입</a></li>
+  </ul>';
 
 
-$seat_ = [
-  1 => "좌석 적은",
-  2 => "좌석 적당",
-  3 => "좌석 많은",
-];
-
-$mood_ = [
-  1 => "소란스러운",
-  2 => "무난한 소음",
-  3 => "조용한",
-];
-
-$cost_ = [
-  1 => "가격비싼",
-  2 => "가격보통",
-  3 => "가격저렴",
-];
+}
 
 
 
@@ -42,6 +38,8 @@ $cost_ = [
 $reviewIdx = $_GET['reviewIdx'];
 $cafeIdx = $_GET['cafeIdx'];
 $userIdx = $_GET['userIdx'];
+
+
 
   #db 연결 부분
   $conn = mysqli_connect(
@@ -62,11 +60,11 @@ where reviewIdx = {$reviewIdx};";
 
   while($row1 = mysqli_fetch_assoc($result)){
    $reviewContent = $row1['reviewContent'];
-   $price = $cost_[$row1['price']];
-   $mood = $mood_[$row1['mood']];
-   $seat = $seat_[$row1['seat']];
+   $price = $row1['price'];
+   $mood = $row1['mood'];
+   $seat = $row1['seat'];
    $totalRating = $row1['totalRating'];
-    
+
 
   }
 
@@ -78,11 +76,9 @@ $result = mysqli_query($conn, $info);
 
 while($row1 = mysqli_fetch_assoc($result)){
  $cafe_name = $row1['cafename'];
-   
+
 
  }
-
-
 
 
 
@@ -93,6 +89,9 @@ window.onload = function(){
     new Rating().setRate("<? echo $totalRating; ?>");
 }
 </script> -->
+
+
+
 </head>
 
 <body>
@@ -106,10 +105,7 @@ window.onload = function(){
                         <i class="fas fa-coffee"></i>
                         <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.php">로그인</a></li>
-                        <li><a href="signin.html">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content">
                     <div class="title">
@@ -124,9 +120,9 @@ window.onload = function(){
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="/">카페 정보</a>
-                    <a href="/">리뷰 목록</a>
+                    <a href="/team12/cafe_list.php">검색 결과</a>
+                    <a href="/team12/cafe_info.php?cafeIdx=<?echo $cafeIdx ?>">카페 정보</a>
+                    <a href="/team12/review_list.php?cafeIdx=<?echo $cafeIdx ?>">리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -147,7 +143,7 @@ window.onload = function(){
               ?>
             </h3>
             <br>
-           
+
             <table class="review_tags">
               <tr><div id="review_tag1">
                 <td><label class="category" for="price">가격</label></td>
@@ -230,15 +226,16 @@ window.onload = function(){
 
             <div class="review_contents" name="reviewContent">
                 <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"></textarea></p>
+                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"><?php echo $reviewContent; ?> </textarea></p>
             </div>
 
             <div class="cmd">
-              <form class="btn_wrap" method="post">
+              <form class="btn_wrap" method="post" action='modify_review.php'>
                 <input class="button" type="submit" name="edit" id="edit" value="수정">
+
               </form>
               <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="location.href='review_list.php'">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
               <!-- 수정하면 db에 업로드하고, 취소하면 이때까지 수정한 것은 db에 업로드 되지 않게 하려함 -->
             </div>

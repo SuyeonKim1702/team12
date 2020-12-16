@@ -2,23 +2,22 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/myStyle.css">
-       
     </head>
     <body>
-        <?php 
+        <?php
 
 $seat_ = [
     "붐비는" =>1,
-    "좌석보통" =>2, 
+    "좌석보통" =>2,
     "좌석많은" =>3,
   ];
-  
+
   $mood_ = [
    "소란스러운" => 1,
    "적당한" => 2,
    "조용한" => 3,
   ];
-  
+
   $cost_ = [
    "가격비쌈" => 1,
     "가격적당" => 2,
@@ -38,7 +37,7 @@ $seat_ = [
 
 
 
-#db 연결 부분 
+#db 연결 부분
 $index = $_GET['cafeIdx'];
 $userIdx = $_POST['userIdx'];
 
@@ -61,7 +60,7 @@ $conn = mysqli_connect(
 
 
 
-   
+
 $new = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
 VALUES
 ('$desc', $userIdx, $index, $price, $mood, $seat, $rate);";
@@ -71,10 +70,10 @@ VALUES
  }
 
 
-  
+
  echo "<script>location.replace('cafe_info.php?cafeIdx=".$index."')</script>";
-  
-      
+
+
          ?>
         </body>
         </html>

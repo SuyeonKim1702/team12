@@ -1,7 +1,24 @@
 <!DOCTYPE html>
 <?php
 
-$index = $_GET['cafeIdx']; 
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+
+}else{
+    $top = '<ul class="nav-menu">
+<li><a href="login.html">로그인</a></li>
+<li><a href="signin.html">회원가입</a></li>
+</ul>';
+
+}
+
+
+
+$index = $_GET['cafeIdx'];
 $path = 'seat.php?cafeIdx='.$index;
 $review_path ='review_list.php?cafeIdx='.$index;
 
@@ -94,12 +111,9 @@ $cafeRating = $row1['rating'];
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content" >
                     <div class="title">
@@ -114,9 +128,9 @@ $cafeRating = $row1['rating'];
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="cafe_info.html">카페 정보</a>
-                    <a href=<?php echo '"'.$review_path.'"' ?>>리뷰 목록</a>
+                    <a href="cafe_list.php">검색 결과</a>
+                    <a href="#">카페 정보</a>
+                    <a href="<?php echo $review_path; ?>">리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -133,14 +147,14 @@ $cafeRating = $row1['rating'];
             </div>
 
           </figure>
-         
-          
-          <section id="main_section">
 
+
+          <section id="main_section">
+            <?$cafe_rating = sprintf('%0.1f', $cafeRating);?>
             <article>
               <span class="cafe_name"><?php echo $cafeName ?></span>
               <i class="fas fa-star" style="color:#ffcc00; font-size: 1.2em;"></i>
-              <span style="color:#3597DB; font-size: 1.2em"><?php echo $cafeRating ?></span>
+              <span style="color:#3597DB; font-size: 1.2em"><?php echo $cafe_rating ?></span>
               <span class="btn_wrap">
                 <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php?cafeIdx=<?php echo $index ?>'" value="리뷰쓰기" />
               </span>
@@ -153,7 +167,7 @@ $cafeRating = $row1['rating'];
                   $tag ="";
                   for($i=0; $i<count($tags);$i=$i+1)
                   $tag= $tag.'<input type="button" class="tags" name="tags" value="#'.$tags[$i].'"></input>';
-           
+
 
                   echo $tag;
                   ?>

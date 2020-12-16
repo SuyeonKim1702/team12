@@ -17,19 +17,25 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-//로그인 되었을 경우 
+//로그인 되었을 경우
 $userIdx = $_SESSION['userIdx'];
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
 }else{
-  //로그인 안 되어있을 경우 
+  //로그인 안 되어있을 경우
   echo "<script language=javascript> alert('리뷰 작성은 로그인 후 이용가능합니다.'); document.location.href = 'login.html'; </script>";
-
+  $top = '<ul class="nav-menu">
+  <li><a href="login.html">로그인</a></li>
+  <li><a href="signin.html">회원가입</a></li>
+  </ul>';
 }
 
 
 
 
 
-$index = $_GET['cafeIdx']; 
+$index = $_GET['cafeIdx'];
 
 
 $conn = mysqli_connect(
@@ -67,10 +73,7 @@ $cafe_name = $row1['cafename'];
                         <i class="fas fa-coffee"></i>
                         <a href="">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.php">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content">
                     <div class="title">
@@ -85,9 +88,9 @@ $cafe_name = $row1['cafename'];
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="/">카페 정보</a>
-                    <a href="/">리뷰 목록</a>
+                    <a href="/team12/cafe_list.php">검색 결과</a>
+                    <a href="/team12/cafe_info.php?cafeIdx=<?echo $index ?>">카페 정보</a>
+                    <a href="/team12/review_list.php?cafeIdx=<?echo $index ?>">리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -129,7 +132,7 @@ $cafe_name = $row1['cafename'];
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
                   <input type="radio" name="mood" id="quiet" value="조용한">
-                  <img src="./tags/조용하다.png" height=30>
+                  <img src="../tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="normal" value="적당한" checked>
@@ -190,7 +193,7 @@ $cafe_name = $row1['cafename'];
                 <input class="button" type="submit" name="save" id="save" value="등록">
               </div>
               <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
+                <input class="button" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
             </div>
 

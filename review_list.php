@@ -21,11 +21,19 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-//로그인 되었을 경우 
+//로그인 되었을 경우
 $currentUser = $_SESSION['userIdx'];
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
 }else{
-  //로그인 안 되어있을 경우 
+  //로그인 안 되어있을 경우
   $currentUser = -1;
+  $top = '<ul class="nav-menu">
+  <li><a href="login.html">로그인</a></li>
+  <li><a href="signin.html">회원가입</a></li>
+  </ul>';
+
 
 }
 
@@ -173,10 +181,7 @@ where c.cafeIdx = {$index};";
                         <i class="fas fa-coffee"></i>
                         <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.php">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content" >
                     <div class="title">
@@ -191,9 +196,9 @@ where c.cafeIdx = {$index};";
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="/">카페 정보</a>
-                    <a href="/">리뷰 목록</a>
+                    <a href="/team12/cafe_list.php">검색 결과</a>
+                    <a href="/team12/cafe_info.php?cafeIdx=<?echo $index ?>">카페 정보</a>
+                    <a href="#">리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -225,12 +230,11 @@ $reviewIdx = $row1['reviewIdx'];
 $path='delete_review.php?cafeIdx='.$index.'&&reviewIdx='.$reviewIdx;
 
 
-
 // 수정 삭제 버튼 html
 
 if($currentUser == $writer ){
   $manage_review_html = "<span class='manage' style='float: right;'>
-  <form action='edit_review.php'>
+  <form method='get' action='edit_review.php'>
     <input type='submit' class='button' value='수정' id='edit'>
     <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
     <input type='hidden' name='userIdx' value=".$currentUser.">
@@ -242,7 +246,7 @@ if($currentUser == $writer ){
   <input type='hidden' name='userIdx' value=".$currentUser.">
   <input type='hidden' name='cafeIdx' value=".$index.">
 </form>
- 
+
 </span>";
 }else{
   $manage_review_html = "";
