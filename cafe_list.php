@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-
-
-
-
 <meta charset="UTF-8">
 <title>List of Cafes</title>
 <link rel ="stylesheet" href ="review.css" type = "text/css">
@@ -19,9 +14,7 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-
-//로그인 되었을 경우 
-
+//로그인 되었을 경우
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
@@ -44,22 +37,17 @@ $conn = mysqli_connect(
 
 
 if(!isset($_POST['status'])){
-
-  //네비게이션 바에서 넘어옴 
-
+  //네비게이션 바에서 넘어옴
   $keyword = $_SESSION['keyword'];
   $string = $_SESSION['string'];
 
 
 }else{
-
-  //검색해서 넘어옴 
-
+  //검색해서 넘어옴
   $keyword = $_POST['cafeName'];
   $string = $_POST['markers'];
   $string = str_replace ("[", "(", $string);
   $string = str_replace ("]", ")", $string);
-
 
   $_SESSION['keyword'] = $keyword;
   $_SESSION['string'] = $string;
@@ -79,15 +67,13 @@ if(strlen($keyword) == 0){
     $cafelist="";
   }
 
+
   //태그로 검색
 }else{
   //카페 이름으로 검색
   $cafelist = "SELECT cafeIdx, cafename, availableSeat, x, y  FROM cafe WHERE cafename LIKE '%".$keyword."%' order by distance;";
 
-  
 }
-
-
 
 ?>
 
@@ -124,11 +110,9 @@ if(strlen($keyword) == 0){
             </div>
             <div>
                 <nav class = "nav_cafe">
-
                     <a href="#">검색 결과</a>
                     <a class='unknown'>카페 정보</a>
                     <a class='unknown'>리뷰 목록</a>
-
 
                 </nav>
             </div>
@@ -169,7 +153,6 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   array_push($location, '{x:'.$x.', y:'.$y.', cafeName:"'.$cafeName.'", seat:'.$seat.'}');
 
 
-
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
   from hashtagList
   join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
@@ -187,9 +170,17 @@ while($row = mysqli_fetch_assoc($result2) and $i<5){
   $i = $i+1;
 }
 
+//좌석에 따라 색깔 정하기
+if($seat==0){
+  $seat_tag_color = "red";
+}
+elseif ($seat<=10) {
+  $seat_tag_color = "green";
+}
+else{
+  $seat_tag_color = "yellow";
+}
 
-
-  $seat_tag_color; //좌석에 따라 색깔 정하기
   $path=$cafeidx;
 
   $data=$data.' <table class="cafe_box" onclick="location.href=\'cafe_info.php?cafeIdx='.$path.'\'">
@@ -221,15 +212,14 @@ echo $data;
 echo json_encode($location);
 
           ?>
-
-<script type="text/javascript">
- var a = <?php echo json_encode($location);?>;
-    
-   
-    console.log(a);
+          <script type="text/javascript">
+           var a = <?php echo json_encode($location);?>;
 
 
-</script>
+              console.log(a);
+
+
+          </script>
 
 
 

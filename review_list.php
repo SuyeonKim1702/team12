@@ -21,17 +21,13 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-
-//로그인 되었을 경우 
-
+//로그인 되었을 경우
 $currentUser = $_SESSION['userIdx'];
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
 }else{
-
-  //로그인 안 되어있을 경우 
-
+  //로그인 안 되어있을 경우
   $currentUser = -1;
   $top = '<ul class="nav-menu">
   <li><a href="login.html">로그인</a></li>
@@ -45,9 +41,6 @@ $top = '<ul class="nav-menu">
 
 //카페 인덱스
  $index = $_GET['cafeIdx'];
-//$index = $_SESSION['cafeIdx'];
-
-
 
 
 $seat = [
@@ -75,56 +68,6 @@ $conn = mysqli_connect(
   'osp',
   '1234',
   'cagong');
-
-
-
-#작성한 리뷰 post 하는 부분 - 원본
-// $new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
-// VALUES
-// ('$reviewContent', $userIdx, $cafeIdx, $price, $mood, $seat, $totalRating);";
-//
-//  if (!mysqli_query($conn,$sql)){
-// die('Error: ' . mysqli_error($conn)); }
-
-#작성한 리뷰 post 하는 부분 - 수정
-// 별점 계산
-
-#$reviewContent =$_POST['reviewContent'];
-#$price = $_POST['price'];
-#$mood = $_POST['mood'];
-#$seat = $_POST['seat'];
-
-#$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
-#VALUES
-#('$reviewContent', $currentUser, $index, $price, $mood, $seat, $star_rate);";
-
- #if (!mysqli_query($conn,$sql)){
-#die('Error: ' . mysqli_error($conn)); }
-
-
-#작성한 리뷰 수정하는 부분 - 원본
-#$modified_review = "UPDATE review
-#SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
-#WHERE reviewIdx = {$reviewIdx};";
-
-# if (!mysqli_query($conn,$sql)){
-#die('Error: ' . mysqli_error($conn)); }
-
-#작성한 리뷰 수정하는 부분 - 원본
-// $modified_review = "UPDATE review
-// SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
-// WHERE reviewIdx = {$reviewIdx};";
-//
-//  if (!mysqli_query($conn,$sql)){
-// die('Error: ' . mysqli_error($conn)); }
-
-
-#작성한 리뷰 삭제하는 부분
-
-// $deleted_review = "DELETE FROM review WHERE reviewIdx = {$reviewIdx};";
-//  if (!mysqli_query($conn,$sql)){
-// die('Error: ' . mysqli_error($conn)); }
-
 
 
 
@@ -157,22 +100,6 @@ where c.cafeIdx = {$index};";
 
 
 
-
-
-
-#예전 코드
-// $review_number = 3;
-// $user_name = array("공시생", "mina98", "먹짱123");
-// $user_image = array("images/사용자이미지2.png", "images/사용자이미지1.png", "images/사용자이미지1.png");
-// $upload_time = array("5일 전", "2일 전", "2시간 전");
-// $score = array(4, 3, 4);
-// $selectedtags = array(array("tags/붐비는.png", "tags/조용한.png", "tags/가격적당.png"),
-// array("tags/좌석많은.png", "tags/소란스러운.png", "tags/가격비쌈.png"),
-// array("tags/좌석많은.png","tags/소란스러운.png","tags/가격적당.png"));
-// $comment = array("주말에 이용했더니 사람이 많아서 10분정도 대기했습니다..! 그래도 조용하 가격도 적당해서 잘 이용했어요 ㅎㅎ 공부하기 좋은 카페 추천합니다!!",
-// "지금까지 잘 이용했는데 갑자기 가격을 올렸네요... 공사 중이라 그런지 너무 시끄럽고 어수선하기도 하고요... 앞으로는 잘 이용 안할 듯 합니다.",
-// "늘 다니던 독서실이 문을 닫아서 처음 방문했는데 좌석도 많고 가격도 합리적이여 좋았습니다. 다만 음악소리가  크고 소란스러워서 다소 어수선했습니다.");
-// $count=$review_number;
 ?>
 </head>
 <body>
@@ -200,19 +127,18 @@ where c.cafeIdx = {$index};";
             </div>
             <div>
                 <nav class = "nav_cafe">
-
                     <a href="/team12/cafe_list.php">검색 결과</a>
                     <a href="/team12/cafe_info.php?cafeIdx=<?echo $index ?>">카페 정보</a>
                     <a href="#">리뷰 목록</a>
-
                 </nav>
             </div>
         </div>
         <div class="bottom-container">
-          <h1>Review List</h1>
           <h2>
           <?php echo mysqli_fetch_assoc($cnt)['count']."건의 방문자 평가";?>
-            <button type="button" id="write_review" type="submit"><img id="write_review_btn" src="images/리뷰쓰기.png" width=90 height=30></button>
+            <span class="btn_wrap">
+              <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php'" value="리뷰쓰기" />
+            </span>
           </h2>
 
           <table class="review_list" width=600>
@@ -240,7 +166,6 @@ $path='delete_review.php?cafeIdx='.$index.'&&reviewIdx='.$reviewIdx;
 
 if($currentUser == $writer ){
   $manage_review_html = "<span class='manage' style='float: right;'>
-  
   <form method='get' action='edit_review.php'>
     <input type='submit' class='button' value='수정' id='edit'>
     <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
@@ -265,16 +190,17 @@ if($currentUser == $writer ){
 $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 <image class='user_img' src='".$user_image."' width=100 height=100>
  <p style='text-align:center;'>".$user_name."</p>
- </td> <td class='review_result'>
+ </td> <td class='review_result'><p>
  <span class='upload_time'>".$upload_time."</span>
- ".$manage_review_html."
- <p class='rating_result'>
-   <font size=7>".$score."</font>
-   <div>
-   <span class='tag_result'><input type='button' value='".$seat[$row1["seat"]]."'></span>
-   <span class='tag_result'><input type='button' value='".$mood[$row1["mood"]]."'></span>
-   <span class='tag_result'><input type='button' value='".$cost[$row1["price"]]."'></span>
-   </div>
+ ".$manage_review_html."</p>
+ <p >
+    <span class='rating_result'><i class='fas fa-star' style='font-size:1.75em'></i>
+    <font size=7>".$score."</font></span>
+    <div>
+    <span class='tag_result'><input type='button' value='".$seat[$row1["seat"]]."'></span>
+    <span class='tag_result'><input type='button' value='".$mood[$row1["mood"]]."'></span>
+    <span class='tag_result'><input type='button' value='".$cost[$row1["price"]]."'></span>
+    </div>
 </p>
 <p class='comment'>".$comment."</p></td></tr>";
 
@@ -282,8 +208,7 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 
 
   }
-//reviewIdx를 edit_review.php로 가져가고 싶은데 정보가 어떤 형식(변수)으로 주어진지 모르겠다.
-//edit_review.php로 reviewIdx를 가져가서, reivew 정보를 html에 업로드할 수 있게 하려함.
+
  mysqli_close($conn);
 
  echo $review_list_html;
