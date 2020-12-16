@@ -163,7 +163,7 @@ $cafe_name = $row1['cafename'];
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="many" value="좌석많은">
-                  <img src="./tags/많다.png" height=30>
+                  <img src="./images/marker_red.png" height=30>
                 </label></td>
               </div></tr>
             </table>
