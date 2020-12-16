@@ -48,7 +48,7 @@ $rate = $star_rate;
 $desc = $_POST['description'];
 
 
-echo $_POST['mood'], $_POST['price'], $_POST['seat'];
+
 
 $mood = $mood_[$_POST['mood']];
 $price = $cost_[$_POST['price']];

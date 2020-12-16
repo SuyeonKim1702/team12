@@ -38,8 +38,6 @@ die('Error: ' . mysqli_error($conn)); }
 ?>
 
 
-
-
 <body>
     <div class = "main-container">
         <div class="main-wrap">
