@@ -6,28 +6,85 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+//마커 좌표위치,좌석정보,남은좌석 수,카페 이름을 데이터베이스에서 받아와서 데이터 배열생성(push);
+var listData=[
+    {
+        cafeName: '스타벅스', //받아 와야함
+        latlng: new kakao.maps.LatLng(37.5584357,126.945926),   //위도경도
+        seatStat: '보통',  //좌석상태
+        seatNum : 10       //남은좌석수
+    },
+    {
+        cafeName: '메가커피',
+        latlng: new kakao.maps.LatLng(37.5578861,126.945949),
+        seatStat: '만석',
+        seatNum: 1
+    }
 
-// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-function displayMarker(locPosition, message) {
+    ];
 
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: locPosition
-    });
+console.log("시행됨");
 
-    var iwContent = message, // 인포윈도우에 표시할 내용
-        iwRemoveable = true;
 
-    // 인포윈도우를 생성합니다
+
+for(var i = 0;i<listData.length;i++) {
+    if(listData[i].seatStat == '만석'){
+        var markerImage = new kakao.maps.MarkerImage('./images/marker_red.png', new kakao.maps.Size(37,37));
+        var marker = new kakao.maps.Marker({
+            map : map,
+            image : markerImage,
+            position: listData[i].latlng,
+        });
+        marker.setMap(map);
+    }
+    else if(listData[i].seatStat == '보통'){
+        var markerImage = new kakao.maps.MarkerImage('./images/mark_yellow.png', new kakao.maps.Size(37,37));
+        var marker = new kakao.maps.Marker({
+            map : map,
+            image : markerImage,
+            position: listData[i].latlng,
+        });
+        marker.setMap(map);
+    }
+    else{
+        var markerImage = new kakao.maps.MarkerImage('./images/mark_green.png', new kakao.maps.Size(37,37));
+        var marker = new kakao.maps.Marker({
+            map : map,
+            image : markerImage,
+            position: listData[i].latlng,
+        });
+        marker.setMap(map);
+    }
+
+    //윈도우 인포에 표시할 내용
+    var content = '<div class="custom">'+listData[i].cafeName+
+        '<div style="color:red; font-size:11px;text-align:center;padding-top:4px">'+' 남은 좌석 수:'+listData[i].seatNum+'</div></div>';
+
     var infowindow = new kakao.maps.InfoWindow({
-        content : iwContent,
-        removable : iwRemoveable
+        content: content
     });
 
-    // 인포윈도우를 마커위에 표시합니다
-    infowindow.open(map, marker);
+    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+    (function(marker, infowindow) {
+        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시
+        kakao.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.open(map, marker);
+        });
 
-    // 지도 중심좌표를 접속위치로 변경합니다
-    map.setCenter(locPosition);
+        // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
+        kakao.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close();
+        });
+    })(marker, infowindow);
+
+
+
+
 }
+
+
+
+
+
+
+

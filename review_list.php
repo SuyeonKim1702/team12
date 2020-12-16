@@ -12,25 +12,30 @@
 <!-- 리뷰가 사용자 리뷰이면, 삭제 수정 버튼 나타나도록함-->
 <style>
 .manage{
- <?if($currentUser!=$row1["userIdx"]){?>
-   display:none;
- <?}?>
+
 }
 </style>
 
 <?php
 
-if(isset($_SESSION[ 'userIdx' ])){
-  //로그인 되어있는 유저의 인덱스
-  $currentUser = $_SESSION['userIdx'];
+
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우 
+$currentUser = $_SESSION['userIdx'];
 }else{
-  //로그인 되어있지 않을 때는 디폴트 -1
+  //로그인 안 되어있을 경우 
   $currentUser = -1;
+
 }
 
+
+
 //카페 인덱스
-// $index = $_GET['cafeIdx'];
-$index = $_SESSION['cafeIdx'];
+ $index = $_GET['cafeIdx'];
+//$index = $_SESSION['cafeIdx'];
+
+
 
 
 $seat = [
@@ -46,9 +51,9 @@ $mood = [
 ];
 
 $cost = [
-  1 => "가격 비싼",
-  2 => "가격 보통",
-  3 => "저렴한",
+  1 => "가격비싼",
+  2 => "가격보통",
+  3 => "가격저렴",
 ];
 
 
@@ -71,33 +76,27 @@ $conn = mysqli_connect(
 
 #작성한 리뷰 post 하는 부분 - 수정
 // 별점 계산
-if(!empty($_POST['rating'])){
-  $max = 0;
-  foreach($_POST['rating'] as $check){
-    if($max < $check) $max = $check;
-  }
-   $star_rate = $max;
-}
-$reviewContent =$_POST['reviewContent'];
-$price = $_POST['price'];
-$mood = $_POST['mood'];
-$seat = $_POST['seat'];
 
-$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
-VALUES
-('$reviewContent', $currentUser, $index, $price, $mood, $seat, $star_rate);";
+#$reviewContent =$_POST['reviewContent'];
+#$price = $_POST['price'];
+#$mood = $_POST['mood'];
+#$seat = $_POST['seat'];
 
- if (!mysqli_query($conn,$sql)){
-die('Error: ' . mysqli_error($conn)); }
+#$new_review = "INSERT INTO review (reviewContent, userIdx, cafeIdx, price, mood, seat, totalRating)
+#VALUES
+#('$reviewContent', $currentUser, $index, $price, $mood, $seat, $star_rate);";
+
+ #if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
 
 
 #작성한 리뷰 수정하는 부분 - 원본
-$modified_review = "UPDATE review
-SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
-WHERE reviewIdx = {$reviewIdx};";
+#$modified_review = "UPDATE review
+#SET reviewContent = '{$reviewContent}', price = {$price}, mood= {$mood}, seat = {$seat}, totalRating = {$totalRating}
+#WHERE reviewIdx = {$reviewIdx};";
 
- if (!mysqli_query($conn,$sql)){
-die('Error: ' . mysqli_error($conn)); }
+# if (!mysqli_query($conn,$sql)){
+#die('Error: ' . mysqli_error($conn)); }
 
 #작성한 리뷰 수정하는 부분 - 원본
 // $modified_review = "UPDATE review
@@ -172,10 +171,10 @@ where c.cafeIdx = {$index};";
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
                     <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="login.php">로그인</a></li>
                         <li><a href="">회원가입</a></li>
                     </ul>
                 </nav>
@@ -218,7 +217,39 @@ $user_name = $row1['nickname'];
 $user_image = "images/사용자이미지2.png";
 $upload_time = $row1['createdAt'];
 $score =$row1['totalRating'];
+$writer = $row1['userIdx'];
 $comment = $row1['reviewContent'];
+$reviewIdx = $row1['reviewIdx'];
+
+
+$path='delete_review.php?cafeIdx='.$index.'&&reviewIdx='.$reviewIdx;
+
+
+
+// 수정 삭제 버튼 html
+
+if($currentUser == $writer ){
+  $manage_review_html = "<span class='manage' style='float: right;'>
+  <form action='edit_review.php'>
+    <input type='submit' class='button' value='수정' id='edit'>
+    <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
+    <input type='hidden' name='userIdx' value=".$currentUser.">
+  <input type='hidden' name='cafeIdx' value=".$index.">
+  </form>
+  <form action='delete_review.php'>
+  <input type='submit' class='button' value='삭제' id='delete'>
+  <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
+  <input type='hidden' name='userIdx' value=".$currentUser.">
+  <input type='hidden' name='cafeIdx' value=".$index.">
+</form>
+ 
+</span>";
+}else{
+  $manage_review_html = "";
+}
+
+
+
 
 $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 <image class='user_img' src='".$user_image."' width=100 height=100>
@@ -237,14 +268,7 @@ $review_list_html = $review_list_html."<tr class='review'> <td width=120>
 <p class='comment'>".$comment."</p></td></tr>";
 
 
-// 수정 삭제 버튼 html
-$manage_review_html = "<span class='manage' style='float: right;'>
-  <form action='edit_reivew.php'>
-    <input type='submit' class='button' value='수정' id='edit'>
-    <input type='hidden' name='reviewIdx' value=".$row1['reviewIdx'].">
-  </form>
-  <input class='button' value='삭제' id='delete'>
-</span>";
+
 
   }
 //reviewIdx를 edit_review.php로 가져가고 싶은데 정보가 어떤 형식(변수)으로 주어진지 모르겠다.

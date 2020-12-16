@@ -13,6 +13,46 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
+<?php
+
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우 
+$userIdx = $_SESSION['userIdx'];
+}else{
+  //로그인 안 되어있을 경우 
+  echo "<script language=javascript> alert('리뷰 작성은 로그인 후 이용가능합니다.'); document.location.href = 'login.html'; </script>";
+
+}
+
+
+
+
+
+$index = $_GET['cafeIdx']; 
+
+
+$conn = mysqli_connect(
+  '15.165.124.76',
+  'osp',
+  '1234',
+  'cagong');
+
+  $info ="SELECT cafename
+  from cafe
+  where cafeIdx = {$index};";
+
+
+$result = mysqli_query($conn, $info);
+
+while($row1 = mysqli_fetch_assoc($result)){
+
+$cafe_name = $row1['cafename'];
+}
+
+?>
+
+
 
 </head>
 
@@ -28,7 +68,7 @@
                         <a href="">KAGONG</a>
                     </div>
                     <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="login.php">로그인</a></li>
                         <li><a href="">회원가입</a></li>
                     </ul>
                 </nav>
@@ -54,12 +94,12 @@
 
         <div class="bottom-container">
 
-          <form name="reviewform" class="reviewform" method="post" action="review_list.php">
+          <form name="reviewform" class="reviewform" method="post" action="save_review.php?cafeIdx=<?php echo $index?> ">
             <input type="hidden" name="id" value="review">
             <!-- 카페 정보창에서 db에서 찾은 cafe idx를 write_review 창에 넘겨준 값-->
-            <input type="hidden" name="cafeIdx" value="<?=  $_SESSION['cafeIdx'] ?>">
+            <input type="hidden" name="cafeIdx" value="<?=$index?>">
             <!-- 로그인 시 설정된 User idx를 넘겨받음 -->
-            <input type="hidden" name="userIdx" value="<?= $_SESSION['userIdx'] ?>">
+            <input type="hidden" name="userIdx" value="<?= $userIdx ?>">
 
             <br><br>
             <h3>
