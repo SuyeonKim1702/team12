@@ -137,7 +137,7 @@ where c.cafeIdx = {$index};";
           <h2>
           <?php echo mysqli_fetch_assoc($cnt)['count']."건의 방문자 평가";?>
             <span class="btn_wrap">
-              <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php'" value="리뷰쓰기" />
+              <input type="button" class="button" id="write_review" onclick = "location.href='write_review.php?cafeIdx=<?php echo $index ?>'" value="리뷰쓰기" />
             </span>
           </h2>
 

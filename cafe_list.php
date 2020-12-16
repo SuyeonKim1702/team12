@@ -196,7 +196,6 @@ else{
 
       </span>
       <div class="seat_status">
-          // 배경색도 값에 따라 다르게 설정
           <input type="button" class="seat_info_tag" name="seat_info_tag" value="'.$seat.'석" style="background-color:'.$seat_tag_color.'"></input>
       </div>
     </td>
@@ -209,7 +208,7 @@ else{
 
 echo $data;
 
-echo json_encode($location);
+
 
           ?>
           <script type="text/javascript">
