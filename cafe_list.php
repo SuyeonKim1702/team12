@@ -16,7 +16,7 @@ session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우
 $top = '<ul class="nav-menu">
-<li><a href="login.html">로그아웃</a></li>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>';
 
 }else{
@@ -178,7 +178,7 @@ else if ($seat<=10) {
   $seat_tag_color = "green";
 }
 else{
-  $seat_tag_color = "yellow";
+  $seat_tag_color = "#ffcc00";
 }
 
   $path=$cafeidx;
