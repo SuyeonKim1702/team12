@@ -82,7 +82,6 @@ $result = mysqli_query($conn, $avg_rating);
 
 while($row1 = mysqli_fetch_assoc($result)){
 $cafeRating = $row1['rating'];
-echo $cafeRating;
 }
 
 
@@ -152,7 +151,7 @@ echo $cafeRating;
 
 
           <section id="main_section">
-            <? $cafe_rating = sprintf('%0.1f', $cafeRating);?>
+            <?php $cafe_rating = sprintf('%0.1f', $cafeRating);?>
             <article>
               <span class="cafe_name"><?php echo $cafeName; ?></span>
               <i class="fas fa-star" style="color:#ffcc00; font-size: 1.2em;"></i>
