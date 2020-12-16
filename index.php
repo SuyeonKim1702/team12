@@ -37,11 +37,15 @@ while($row1 = mysqli_fetch_assoc($result)){
  $seat = $row1['availableSeat'];
 
 
- array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
+ #array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
 
 }
 
-
+$i = 0;
+while($i<100){
+ array_push($location, array("x" => 37.55+$i*0.001, "y" => 126.9+$i*0.001, "cafeName" => "신촌카페", "seat" => 5));
+ $i++;
+}
    
 
 
