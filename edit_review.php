@@ -15,6 +15,26 @@
 
 <?php
 
+
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우 
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+}else{
+  //로그인 안 되어있을 경우 
+  $top = '<ul class="nav-menu">
+  <li><a href="login.html">로그인</a></li>
+  <li><a href="signin.html">회원가입</a></li>
+  </ul>';
+  
+
+}
+
+
+
+
 $reviewIdx = $_GET['reviewIdx'];
 $cafeIdx = $_GET['cafeIdx'];
 $userIdx = $_GET['userIdx'];
@@ -82,10 +102,7 @@ window.onload = function(){
                         <i class="fas fa-coffee"></i>
                         <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.php">로그인</a></li>
-                        <li><a href="signin.html">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content">
                     <div class="title">

@@ -19,9 +19,16 @@ session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우 
 $userIdx = $_SESSION['userIdx'];
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
 }else{
   //로그인 안 되어있을 경우 
   echo "<script language=javascript> alert('리뷰 작성은 로그인 후 이용가능합니다.'); document.location.href = 'login.html'; </script>";
+  $top = '<ul class="nav-menu">
+  <li><a href="login.html">로그인</a></li>
+  <li><a href="signin.html">회원가입</a></li>
+  </ul>';
 
 }
 
@@ -67,10 +74,7 @@ $cafe_name = $row1['cafename'];
                         <i class="fas fa-coffee"></i>
                         <a href="">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.php">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content">
                     <div class="title">

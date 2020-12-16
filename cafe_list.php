@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+
+
+
+
 <meta charset="UTF-8">
 <title>List of Cafes</title>
 <link rel ="stylesheet" href ="review.css" type = "text/css">
@@ -75,6 +80,10 @@ if(strlen($keyword) == 0){
   
 }
 
+
+
+
+
 ?>
 </head>
 
@@ -129,6 +138,9 @@ if(strlen($keyword) == 0){
 
           
 $j = 0;
+
+$location = array();
+
 while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   $j = $j +1;
   $cafeidx = $row1['cafeIdx'];
@@ -138,6 +150,10 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   //x -> 위도, y -> 경도
   $x = $row1['x'];
   $y = $row1['y'];
+
+
+  array_push($location, '{x:'.$x.', y:'.$y.', cafeName:"'.$cafeName.'", seat:'.$seat.'}');
+
   
 
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
@@ -189,7 +205,21 @@ while($row = mysqli_fetch_assoc($result2) and $i<5){
            
 
 echo $data;
+
+echo json_encode($location);
+
           ?>
+<script type="text/javascript">
+ var a = <?php echo json_encode($location);?>;
+    
+   
+    console.log(a);
+
+
+</script>
+
+
+
 
           
 
