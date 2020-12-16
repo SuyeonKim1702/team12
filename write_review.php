@@ -148,7 +148,7 @@ $cafe_name = $row1['cafename'];
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="noisy" value="소란스러운">
-                  <img src="./tags/소란스럽다.png" height=30>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/codeing-9f456.appspot.com/o/%E1%84%89%E1%85%A9%E1%84%85%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B3%E1%84%85%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A1.png?alt=media&token=5846d3b3-ed2f-482d-9e35-d0333962130d" height=30>
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
@@ -163,7 +163,7 @@ $cafe_name = $row1['cafename'];
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="many" value="좌석많은">
-                  <img src="./images/lot.png" height=30>
+                  <img src="./tags/많은.png" height=30>
                 </label></td>
               </div></tr>
             </table>
