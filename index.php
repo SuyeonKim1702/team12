@@ -4,7 +4,7 @@ session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우 
 $top = '<ul class="nav-menu">
-<li><a href="login.html">로그아웃</a></li>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>';
 
 }else{
@@ -37,15 +37,11 @@ while($row1 = mysqli_fetch_assoc($result)){
  $seat = $row1['availableSeat'];
 
 
- #array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
+ array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
 
 }
 
-$i = 0;
-while($i<100){
- array_push($location, array("x" => 37.55+$i*0.001, "y" => 126.9+$i*0.001, "cafeName" => "신촌카페", "seat" => 5));
- $i++;
-}
+
    
 
 

@@ -22,7 +22,7 @@ if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 
 $userIdx = $_SESSION['userIdx'];
 $top = '<ul class="nav-menu">
-<li><a href="login.html">로그아웃</a></li>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>';
 }else{
 
