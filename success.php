@@ -44,12 +44,22 @@ die('Error: ' . mysqli_error($conn)); }
             <header>
                 <div class="logo">
                     <i class="fas fa-coffee"></i>
-                    <a href="index.html">KAGONG</a>
+                    <a href="index.php">KAGONG</a>
                 </div>
-                <p>  회원가입 성공 </p>
-                        </div>
-                    </section>
-                </form>
+
+                    <p style="font-size:32px; font-weight:bold; padding-top:10px;"> 회원가입을 축하합니다! </p>
+
+                    <p>로그인하여 카공족들을 위한 카페 리뷰를 작성하고 좌석 정보를 공유해보세요!
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="click" style="text-align:left">
+                         <a href="index.php" style="margin-right:10px;">홈으로 돌아가기</a>
+                         <a href="login.html" >로그인 하기</a>
+                    </div>
+
             </header>
         </div>
     </div>
