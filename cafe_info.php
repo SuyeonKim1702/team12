@@ -3,7 +3,9 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-//로그인 되었을 경우
+
+//로그인 되었을 경우 
+
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
@@ -18,7 +20,9 @@ $top = '<ul class="nav-menu">
 
 
 
-$index = $_GET['cafeIdx'];
+
+$index = $_GET['cafeIdx']; 
+
 $path = 'seat.php?cafeIdx='.$index;
 $review_path ='review_list.php?cafeIdx='.$index;
 
@@ -131,6 +135,8 @@ $cafeRating = $row1['rating'];
                     <a href="cafe_list.php">검색 결과</a>
                     <a href="#">카페 정보</a>
                     <a href="<?php echo $review_path; ?>">리뷰 목록</a>
+
+
                 </nav>
             </div>
         </div>
