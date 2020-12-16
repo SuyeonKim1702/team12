@@ -14,7 +14,48 @@ $top = '<ul class="nav-menu">
 </ul>';
 
 }
+
+
+$conn = mysqli_connect(
+    '15.165.124.76',
+    'osp',
+    '1234',
+    'cagong');
+
+
+$cafelist = "SELECT cafeIdx as cafeIdx, x, y, cafename, availableSeat
+from cafe;";
+
+$result = mysqli_query($conn, $cafelist);
+
+$location = array();
+
+while($row1 = mysqli_fetch_assoc($result)){
+ $x = $row1['x'];
+ $y = $row1['y'];
+ $cafeName = $row1['cafename'];
+ $seat = $row1['availableSeat'];
+
+
+ array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat" => $seat));
+
+}
+
+
+   
+
+
 ?>
+
+
+<script type="text/javascript">
+           var a = <?php echo json_encode($location);?>;
+
+
+              console.log(a);
+
+
+          </script>
    
 <head>
     <meta charset="UTF-8">
@@ -133,9 +174,6 @@ $top = '<ul class="nav-menu">
                                         }
                                     }
                                 );
-                        
-
-
                             });
                         </script>
 
