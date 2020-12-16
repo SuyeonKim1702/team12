@@ -6,7 +6,6 @@ Rating.prototype.setRate = function(newrate){
     //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
     this.rate = newrate;
     //별점 넘기는 변수
-
     let items = document.querySelectorAll('.rate_radio');
     items.forEach(function(item, idx){
         if(idx < newrate){

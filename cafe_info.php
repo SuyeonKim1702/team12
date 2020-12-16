@@ -3,9 +3,7 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-
-//로그인 되었을 경우 
-
+//로그인 되었을 경우
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
@@ -20,9 +18,7 @@ $top = '<ul class="nav-menu">
 
 
 
-
-$index = $_GET['cafeIdx']; 
-
+$index = $_GET['cafeIdx'];
 $path = 'seat.php?cafeIdx='.$index;
 $review_path ='review_list.php?cafeIdx='.$index;
 
@@ -99,7 +95,7 @@ $cafeRating = $row1['rating'];
   <title>Details about Cafe</title>
   <link rel= "stylesheet" href="review.css" type = "text/css">
   <link rel= "stylesheet" href="button.css" type = "text/css">
-  <link rel = "stylesheet" href="tag.php" type="text/css">
+  <link rel = "stylesheet" href="tag.css" type="text/css">
   <link rel= "stylesheet" href="cafe_info.css" type = "text/css">
   <script src= "https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
   <link rel= "preconnect" href = "https://fonts.gstatic.com">
@@ -135,8 +131,6 @@ $cafeRating = $row1['rating'];
                     <a href="cafe_list.php">검색 결과</a>
                     <a href="#">카페 정보</a>
                     <a href="<?php echo $review_path; ?>">리뷰 목록</a>
-
-
                 </nav>
             </div>
         </div>

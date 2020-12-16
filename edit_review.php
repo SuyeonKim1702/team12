@@ -18,20 +18,17 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
-
-//로그인 되었을 경우 
-
+//로그인 되었을 경우
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
 }else{
-
   //로그인 안 되어있을 경우
-
   $top = '<ul class="nav-menu">
   <li><a href="login.html">로그인</a></li>
   <li><a href="signin.html">회원가입</a></li>
   </ul>';
+
 
 }
 
@@ -79,6 +76,7 @@ $result = mysqli_query($conn, $info);
 
 while($row1 = mysqli_fetch_assoc($result)){
  $cafe_name = $row1['cafename'];
+
 
  }
 
