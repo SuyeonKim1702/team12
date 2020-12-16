@@ -5,11 +5,14 @@
 <title>List of Cafes</title>
 <link rel ="stylesheet" href ="review.css" type = "text/css">
 <link rel = "stylesheet" href ="cafe_list.css" type = "text/css">
-
 <link rel = "stylesheet" href="tag.php" type="text/css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16e368477251c61b33e8b365f4d7a601&libraries=LIBRARY"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16e368477251c61b33e8b365f4d7a601"></script>
 <script src= "https://kit.fontawesome.com/7b88aa951e.js" crossorigin="anonymous"></script>
 <link rel= "preconnect" href="https://fonts.gstatic.com">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <link href= "https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
 <?php
 
 session_start();
@@ -65,7 +68,7 @@ if(strlen($keyword) == 0){
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
                     <ul class="nav-menu">
                         <li><a href="login.html">로그인</a></li>
@@ -92,7 +95,9 @@ if(strlen($keyword) == 0){
             </div>
         </div>
         <div class="bottom-container2">
-          <h1>지도</h1>
+            <p>
+           <div id="map" style="width:640px;height:400px;"></div>
+            <script type="text/javascript" src = "searchMap.js"></script>
           <!-- 검색된 카페 리스트 -->
           <div class="cafe-container">
 
@@ -110,6 +115,7 @@ if(strlen($keyword) == 0){
 
           
 $j = 0;
+$location = array();
 while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   $j = $j +1;
   $cafeidx = $row1['cafeIdx'];
@@ -119,7 +125,10 @@ while($row1 = mysqli_fetch_assoc($result) and $j < 40){
   //x -> 위도, y -> 경도
   $x = $row1['x'];
   $y = $row1['y'];
-  
+
+  array_push($location, '{x:'.$x.', y:'.$y.', cafeName:"'.$cafeName.'", seat:'.$seat.'}');
+
+
 
   $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
   from hashtagList
@@ -183,3 +192,6 @@ echo $data;
 
 </body>
 </html>
+
+
+////
