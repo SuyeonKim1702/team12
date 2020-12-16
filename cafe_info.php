@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <?php
 
+session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우 
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+
+}else{
+    $top = '<ul class="nav-menu">
+<li><a href="login.html">로그인</a></li>
+<li><a href="signin.html">회원가입</a></li>
+</ul>';
+
+}
+
+
+
 $index = $_GET['cafeIdx']; 
 $path = 'seat.php?cafeIdx='.$index;
 $review_path ='review_list.php?cafeIdx='.$index;
@@ -94,12 +111,9 @@ $cafeRating = $row1['rating'];
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content" >
                     <div class="title">
@@ -114,8 +128,8 @@ $cafeRating = $row1['rating'];
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="cafe_info.html">카페 정보</a>
+                    <a href="cafe_list.php">검색 결과</a>
+                    <a href="">카페 정보</a>
                     <a href=<?php echo '"'.$review_path.'"' ?>>리뷰 목록</a>
                 </nav>
             </div>

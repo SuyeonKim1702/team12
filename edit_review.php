@@ -15,33 +15,11 @@
 
 <?php
 
-
-
-
-$seat_ = [
-  1 => "좌석 적은",
-  2 => "좌석 적당",
-  3 => "좌석 많은",
-];
-
-$mood_ = [
-  1 => "소란스러운",
-  2 => "무난한 소음",
-  3 => "조용한",
-];
-
-$cost_ = [
-  1 => "가격비싼",
-  2 => "가격보통",
-  3 => "가격저렴",
-];
-
-
-
-
 $reviewIdx = $_GET['reviewIdx'];
 $cafeIdx = $_GET['cafeIdx'];
 $userIdx = $_GET['userIdx'];
+
+
 
   #db 연결 부분
   $conn = mysqli_connect(
@@ -62,9 +40,9 @@ where reviewIdx = {$reviewIdx};";
 
   while($row1 = mysqli_fetch_assoc($result)){
    $reviewContent = $row1['reviewContent'];
-   $price = $cost_[$row1['price']];
-   $mood = $mood_[$row1['mood']];
-   $seat = $seat_[$row1['seat']];
+   $price = $row1['price'];
+   $mood = $row1['mood'];
+   $seat = $row1['seat'];
    $totalRating = $row1['totalRating'];
     
 
@@ -81,8 +59,6 @@ while($row1 = mysqli_fetch_assoc($result)){
    
 
  }
-
-
 
 
 
@@ -230,7 +206,7 @@ window.onload = function(){
 
             <div class="review_contents" name="reviewContent">
                 <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"></textarea></p>
+                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"><?php echo $reviewContent?> </textarea></p>
             </div>
 
             <div class="cmd">
@@ -238,7 +214,7 @@ window.onload = function(){
                 <input class="button" type="submit" name="edit" id="edit" value="수정">
               </form>
               <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="location.href='review_list.php'">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
               <!-- 수정하면 db에 업로드하고, 취소하면 이때까지 수정한 것은 db에 업로드 되지 않게 하려함 -->
             </div>

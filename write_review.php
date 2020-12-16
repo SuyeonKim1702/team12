@@ -86,8 +86,8 @@ $cafe_name = $row1['cafename'];
             <div>
                 <nav class = "nav_cafe">
                     <a href="/">검색 결과</a>
-                    <a href="/">카페 정보</a>
-                    <a href="/">리뷰 목록</a>
+                    <a href="/team12/cafe_info.php?cafeIdx=<?echo $index ?>">카페 정보</a>
+                    <a href="/team12/review_list.php?cafeIdx=<?echo $index ?>">리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -129,7 +129,7 @@ $cafe_name = $row1['cafename'];
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
                   <input type="radio" name="mood" id="quiet" value="조용한">
-                  <img src="./tags/조용하다.png" height=30>
+                  <img src="../tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="normal" value="적당한" checked>

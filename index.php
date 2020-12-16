@@ -78,6 +78,7 @@ $top = '<ul class="nav-menu">
                         <div style="display:flex">
                             <input type="search" placeholder="카페 이름 입력 또는 태그 설정" name="cafeName" id="cafeName" onclick="drop()"/>
                             <input type="hidden" id="markers" name="markers">
+                            <input type="hidden" id="status" name="status" value="1">
                             <button type = "submit" class = "search-btn"><i class="fas fa-search" style="color:white; font-size:20px;"></i></button>
                         </div>
                         <div id="drop-taglist" style="display:none;">

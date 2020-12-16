@@ -13,6 +13,19 @@
 <?php
 
 session_start();
+if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+//로그인 되었을 경우 
+$top = '<ul class="nav-menu">
+<li><a href="login.html">로그아웃</a></li>
+</ul>';
+
+}else{
+    $top = '<ul class="nav-menu">
+<li><a href="login.html">로그인</a></li>
+<li><a href="signin.html">회원가입</a></li>
+</ul>';
+
+}
 
 
 $conn = mysqli_connect(
@@ -21,11 +34,27 @@ $conn = mysqli_connect(
   '1234',
   'cagong');
 
-$string = $_POST['markers'];
-$string = str_replace ("[", "(", $string);
-$string = str_replace ("]", ")", $string);
 
-$keyword = $_POST['cafeName'];
+
+if(!isset($_POST['status'])){
+  //네비게이션 바에서 넘어옴 
+  $keyword = $_SESSION['keyword'];
+  $string = $_SESSION['string'];
+
+
+}else{
+  //검색해서 넘어옴 
+  $keyword = $_POST['cafeName'];
+  $string = $_POST['markers'];
+  $string = str_replace ("[", "(", $string);
+  $string = str_replace ("]", ")", $string);
+ 
+  $_SESSION['keyword'] = $keyword;
+  $_SESSION['string'] = $string;
+
+}
+
+
 if(strlen($keyword) == 0){
   if(strlen($string)>2){
     $cafelist = "SELECT c.cafeIdx as cafeIdx, distance, c.cafename as cafename, x, y, availableSeat, count(hashtagIdx) as count from hashtagList
@@ -38,7 +67,6 @@ if(strlen($keyword) == 0){
     $cafelist="";
   }
   
-
   
   //태그로 검색
 }else{ 
@@ -46,12 +74,6 @@ if(strlen($keyword) == 0){
   $cafelist = "SELECT cafeIdx, cafename, availableSeat, x, y  FROM cafe WHERE cafename LIKE '%".$keyword."%' order by distance;";
   
 }
-
-
-
-
-
-
 
 ?>
 </head>
@@ -65,12 +87,9 @@ if(strlen($keyword) == 0){
                 <nav class="navbar">
                     <div class="nav-logo">
                         <i class="fas fa-coffee"></i>
-                        <a href="">KAGONG</a>
+                        <a href="index.php">KAGONG</a>
                     </div>
-                    <ul class="nav-menu">
-                        <li><a href="login.html">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
+                    <?php echo $top ?>
                 </nav>
                 <div class="main-content" >
                     <div class="title">
@@ -85,7 +104,7 @@ if(strlen($keyword) == 0){
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
+                    <a href="">검색 결과</a>
                     <a href="/">카페 정보</a>
                     <a href="/">리뷰 목록</a>
                 </nav>
