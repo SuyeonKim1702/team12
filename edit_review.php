@@ -18,17 +18,20 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+
 //로그인 되었을 경우 
+
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
 }else{
-  //로그인 안 되어있을 경우 
+
+  //로그인 안 되어있을 경우
+
   $top = '<ul class="nav-menu">
   <li><a href="login.html">로그인</a></li>
   <li><a href="signin.html">회원가입</a></li>
   </ul>';
-  
 
 }
 
@@ -64,7 +67,7 @@ where reviewIdx = {$reviewIdx};";
    $mood = $row1['mood'];
    $seat = $row1['seat'];
    $totalRating = $row1['totalRating'];
-    
+
 
   }
 
@@ -76,7 +79,6 @@ $result = mysqli_query($conn, $info);
 
 while($row1 = mysqli_fetch_assoc($result)){
  $cafe_name = $row1['cafename'];
-   
 
  }
 
@@ -89,6 +91,9 @@ window.onload = function(){
     new Rating().setRate("<? echo $totalRating; ?>");
 }
 </script> -->
+
+
+
 </head>
 
 <body>
@@ -117,9 +122,9 @@ window.onload = function(){
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
-                    <a href="/">카페 정보</a>
-                    <a href="/">리뷰 목록</a>
+                    <a href="/team12/cafe_list.php">검색 결과</a>
+                    <a href="/team12/cafe_info.php?cafeIdx=<?echo $cafeIdx ?>">카페 정보</a>
+                    <a href="/team12/review_list.php?cafeIdx=<?echo $cafeIdx ?>">리뷰 목록</a>
                 </nav>
             </div>
         </div>
@@ -140,7 +145,7 @@ window.onload = function(){
               ?>
             </h3>
             <br>
-           
+
             <table class="review_tags">
               <tr><div id="review_tag1">
                 <td><label class="category" for="price">가격</label></td>
@@ -223,12 +228,13 @@ window.onload = function(){
 
             <div class="review_contents" name="reviewContent">
                 <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"><?php echo $reviewContent?> </textarea></p>
+                <p><textarea name="description" placeholder="리뷰를 작성해주세요." rows="20" cols="70"><?php echo $reviewContent; ?> </textarea></p>
             </div>
 
             <div class="cmd">
-              <form class="btn_wrap" method="post">
+              <form class="btn_wrap" method="post" action='modify_review.php'>
                 <input class="button" type="submit" name="edit" id="edit" value="수정">
+
               </form>
               <div class="btn_wrap">
                 <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">

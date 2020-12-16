@@ -17,13 +17,17 @@
 
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
+
 //로그인 되었을 경우 
+
 $userIdx = $_SESSION['userIdx'];
 $top = '<ul class="nav-menu">
 <li><a href="login.html">로그아웃</a></li>
 </ul>';
 }else{
+
   //로그인 안 되어있을 경우 
+
   echo "<script language=javascript> alert('리뷰 작성은 로그인 후 이용가능합니다.'); document.location.href = 'login.html'; </script>";
   $top = '<ul class="nav-menu">
   <li><a href="login.html">로그인</a></li>
@@ -36,7 +40,9 @@ $top = '<ul class="nav-menu">
 
 
 
+
 $index = $_GET['cafeIdx']; 
+
 
 
 $conn = mysqli_connect(
@@ -89,7 +95,8 @@ $cafe_name = $row1['cafename'];
             </div>
             <div>
                 <nav class = "nav_cafe">
-                    <a href="/">검색 결과</a>
+
+                    <a href="/team12/cafe_list.php">검색 결과</a>
                     <a href="/team12/cafe_info.php?cafeIdx=<?echo $index ?>">카페 정보</a>
                     <a href="/team12/review_list.php?cafeIdx=<?echo $index ?>">리뷰 목록</a>
                 </nav>
@@ -194,7 +201,7 @@ $cafe_name = $row1['cafename'];
                 <input class="button" type="submit" name="save" id="save" value="등록">
               </div>
               <div class="btn_wrap">
-                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
+                <input class="button" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
             </div>
 

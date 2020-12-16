@@ -23,7 +23,7 @@
 } */
 .cafe_box{
   width: 380px;
-  height: 210px;
+  height: 250px;
   background-color: #F3F1FA;
 
   /*영역 자체에 링크*/
@@ -35,14 +35,14 @@
 }
 .cafe_box1 .cafe_image{
   width: 180px;
-  height: 170px;
+  height: 180px;
   overflow: hidden;
 }
 .cafe_box1 .cafe_image img{
   max-width: 100%;
   height:auto;
   display:block;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .cafe_box1 .cafe_name{
