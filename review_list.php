@@ -153,7 +153,7 @@ while($row1 = mysqli_fetch_assoc($result)){
 
 $review_number = count($row1);
 $user_name = $row1['nickname'];
-$user_image = "images/사용자이미지2.png";
+$user_image = "https://ifh.cc/g/9prJfA.png";
 $upload_time = $row1['createdAt'];
 $score =$row1['totalRating'];
 $writer = $row1['userIdx'];

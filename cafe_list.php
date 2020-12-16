@@ -83,7 +83,8 @@ array_push($location, array("x" => $x, "y" => $y, "cafeName" => $cafeName, "seat
 $hashtag = "SELECT h.hashtagIdx as hashtagIdx, hashtagName
 from hashtagList
 join hashtag h on hashtagList.hashtagIdx = h.hashtagIdx
-where cafeIdx={$cafeidx};";
+where cafeIdx={$cafeidx}
+group by h.hashtagIdx;";
 
 $result2 = mysqli_query($conn, $hashtag);
 $i = 0;
@@ -174,6 +175,7 @@ function unknown(){
         <div class="bottom-container2">
           <h1>지도</h1>
           <!-- 검색된 카페 리스트 -->
+          <br><br>
           <div class="d">
                 <div id="map" style="width:1250px;height:450px;"></div>
 

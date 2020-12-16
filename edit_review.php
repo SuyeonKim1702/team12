@@ -150,17 +150,17 @@ window.onload = function(){
                 <td><label class="column">
                     <input type="radio" name="price" id="cheap" value="가격저렴"
                     <?php echo ($price == 1) ?  "checked" : "" ;  ?>>
-                    <img src="./tags/저렴하다.png" height=30>
+                    <img src="https://ifh.cc/g/1pkryN.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="reasonable" value="가격적당"
                     <?php echo ($price == 2) ?  "checked" : "" ;  ?>>
-                    <img src="./tags/보통.png" height=30>
+                    <img src="https://ifh.cc/g/3hVQWs.png" height=30>
                   </label>
                   <label class="column">
                     <input type="radio" name="price" id="expensive" value="가격비쌈"
                     <?php echo ($price == 3) ?  "checked" : "" ;  ?>>
-                    <img src="./tags/비싸다.png" height=30>
+                    <img src="https://ifh.cc/g/NJJRV4.png" height=30>
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
@@ -168,17 +168,17 @@ window.onload = function(){
                 <td><label class="column">
                   <input type="radio" name="mood" id="quiet" value="조용한"
                   <?php echo ($mood == 3) ?  "checked" : "" ;  ?>>
-                  <img src="./tags/조용하다.png" height=30>
+                  <img src="https://ifh.cc/g/8awCDu.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="normal" value="적당한"
                   <?php echo ($mood == 2) ?  "checked" : "" ;  ?>>
-                  <img src="./tags/보통.png" height=30>
+                  <img src="https://ifh.cc/g/3hVQWs.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="mood" id="noisy" value="소란스러운"
                   <?php echo ($mood == 1) ?  "checked" : "" ;  ?>>
-                  <img src="./tags/소란스럽다.png" height=30>
+                  <img src="https://ifh.cc/g/ky4IYe.png" height=30>
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
@@ -186,17 +186,17 @@ window.onload = function(){
                 <td><label class="column">
                   <input type="radio" name="seat" id="few" value="붐비는"
                   <?php echo ($seat == 1) ?  "checked" : "" ;  ?>>
-                  <img src="./tags/적다.png" height=30>
+                  <img src="https://ifh.cc/g/MhzAXQ.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="average" value="좌석보통"
                   <?php echo ($seat == 2) ?  "checked" : "" ;  ?>>
-                  <img src="./tags/보통.png" height=30>
+                  <img src="https://ifh.cc/g/3hVQWs.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="many" value="좌석많은"
                   <?php echo ($seat == 3) ?  "checked" : "" ;  ?>>
-                  <img src="./tags/많다.png" height=30>
+                  <img src="https://ifh.cc/g/81B96w.png" height=30>
                 </label></td>
               </div></tr>
             </table>

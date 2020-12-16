@@ -82,6 +82,7 @@ $result = mysqli_query($conn, $avg_rating);
 
 while($row1 = mysqli_fetch_assoc($result)){
 $cafeRating = $row1['rating'];
+echo $cafeRating;
 }
 
 
