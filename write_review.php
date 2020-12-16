@@ -18,7 +18,7 @@
 session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 
-//로그인 되었을 경우 
+//로그인 되었을 경우
 
 $userIdx = $_SESSION['userIdx'];
 $top = '<ul class="nav-menu">
@@ -26,7 +26,7 @@ $top = '<ul class="nav-menu">
 </ul>';
 }else{
 
-  //로그인 안 되어있을 경우 
+  //로그인 안 되어있을 경우
 
   echo "<script language=javascript> alert('리뷰 작성은 로그인 후 이용가능합니다.'); document.location.href = 'login.html'; </script>";
   $top = '<ul class="nav-menu">
@@ -41,7 +41,7 @@ $top = '<ul class="nav-menu">
 
 
 
-$index = $_GET['cafeIdx']; 
+$index = $_GET['cafeIdx'];
 
 
 
@@ -125,6 +125,7 @@ $cafe_name = $row1['cafename'];
                 <td><label class="category" for="price">가격</label></td>
                 <td><label class="column">
                     <input type="radio" name="price" id="cheap" value="가격저렴">
+<<<<<<< HEAD
                     <img src="./tags/저렴하다.png" height=30>
                   </label>
                   <label class="column">
@@ -134,12 +135,24 @@ $cafe_name = $row1['cafename'];
                   <label class="column">
                     <input type="radio" name="price" id="expensive" value="가격비쌈">
                     <img src="./tags/비싸다.png" height=30>
+=======
+                    <img src="https://ifh.cc/g/1pkryN.png" height=30>
+                  </label>
+                  <label class="column">
+                    <input type="radio" name="price" id="reasonable" value="가격적당" checked>
+                    <img src="https://ifh.cc/g/3hVQWs.png" height=30>
+                  </label>
+                  <label class="column">
+                    <input type="radio" name="price" id="expensive" value="가격비쌈">
+                    <img src="https://ifh.cc/g/NJJRV4.png" height=30>
+>>>>>>> bf651ce210f3ad8a3d5de9be836e9b275ab66fc9
                   </label></td>
               </div></tr>
               <tr><div id="review_tag2">
                 <td><label class="category" for="mood">분위기</label></td>
                 <td><label class="column">
                   <input type="radio" name="mood" id="quiet" value="조용한">
+<<<<<<< HEAD
                   <img src="./tags/조용하다.png" height=30>
                 </label>
                 <label class="column">
@@ -149,17 +162,36 @@ $cafe_name = $row1['cafename'];
                 <label class="column">
                   <input type="radio" name="mood" id="noisy" value="소란스러운">
                   <img src="./tags/소란스럽다.png" height=30>
+=======
+                  <img src="https://ifh.cc/g/8awCDu.png" height=30>
+                </label>
+                <label class="column">
+                  <input type="radio" name="mood" id="normal" value="적당한" checked>
+                  <img src="https://ifh.cc/g/3hVQWs.png" height=30>
+                </label>
+                <label class="column">
+                  <input type="radio" name="mood" id="noisy" value="소란스러운">
+                  <img src="https://ifh.cc/g/ky4IYe.png" height=30>
+>>>>>>> bf651ce210f3ad8a3d5de9be836e9b275ab66fc9
                 </label></td>
               </div></tr>
               <tr><div id="review_tag3">
                 <td><label class="category" for="seat">좌석 갯수</label></td>
                 <td><label class="column">
                   <input type="radio" name="seat" id="few" value="붐비는">
+<<<<<<< HEAD
                   <img src="./tags/적다.png" height=30>
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="average" value="좌석보통" checked>
                   <img src="./tags/보통.png" height=30>
+=======
+                  <img src="https://ifh.cc/g/MhzAXQ.png" height=30>
+                </label>
+                <label class="column">
+                  <input type="radio" name="seat" id="average" value="좌석보통" checked>
+                  <img src="https://ifh.cc/g/3hVQWs.png" height=30>
+>>>>>>> bf651ce210f3ad8a3d5de9be836e9b275ab66fc9
                 </label>
                 <label class="column">
                   <input type="radio" name="seat" id="many" value="좌석많은">
@@ -201,7 +233,7 @@ $cafe_name = $row1['cafename'];
                 <input class="button" type="submit" name="save" id="save" value="등록">
               </div>
               <div class="btn_wrap">
-                <input class="button" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
+                <input class="button" type="reset" name="cancel" id="cancel" value="취소" onclick="history.back(1)">
               </div>
             </div>
 

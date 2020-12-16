@@ -1,3 +1,7 @@
+.nav_cafe a{
+  cursor:pointer;
+}
+
 /* 화면 한가운데로 */
 .bottom-container{
     /* display:flex; */
