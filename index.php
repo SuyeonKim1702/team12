@@ -103,7 +103,7 @@ while($row1 = mysqli_fetch_assoc($result)){
                 </nav>
                 <div class="main-content" >
                     <div class="title">
-                        <h1>Cafe Reivew and Recommendation</h1>
+                        <h1>Cafe Review and Recommendation</h1>
                         <h1>Service for Kagong People</h1>
                     </div>
                 <!--  검색창   -->
