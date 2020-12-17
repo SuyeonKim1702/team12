@@ -118,37 +118,14 @@ body{
 }
 
 /* 검색창 */
-form.main-searchbox{
-    text-align:center;
-    display:flex;
 
-}
 .title{
     color: white;
     text-align: center;
 }
 
-form.main-searchbox input{
-    background-color: white;
-    width: 460px;
-    height:50px;
-    padding: 10px;
-    /* 테두리를 원형으로 border-top-left-radius:25px;
-    border-bottom-left-radius:25px; 시계방향으로*/
-    border-radius:25px 0 0 25px;
-    /* 음각 없애기 */
-    border:none;
-}
-form.main-searchbox button{
-    cursor:pointer;
-    background-color:orange;
-    width:80px;
-    height:50px;
-    padding:10px;
-    border-radius:0 25px 25px 0;
-    border:none;
-    margin-left:-8px;
-}
+
+
 
 /* 디버그용 */
 /* table, tr, td{
@@ -308,5 +285,5 @@ form.main-searchbox button{
   margin: 10px auto;
 }
 .comment{
-  line-height:20px; 20%;
+  line-height:20px;
 }

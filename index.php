@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION[ 'is_logged' ]) && $_SESSION[ 'is_logged' ] == 'Y'){
 //로그인 되었을 경우 
 $top = '<ul class="nav-menu">
-<li><a href="logout.php">로그아웃</a></li>
+<li><a href="logout.php">Log Out</a></li>
 </ul>';
 
 }else{
@@ -174,7 +174,7 @@ while($row1 = mysqli_fetch_assoc($result)){
                 </div>
             </div>
         </div>
-        <div class="bottom-container">
+        <div class="bottom-container_2">
             <!--    왼쪽 영역     -->
             <div class="bottom-left-container">
                 <div class="intro">
