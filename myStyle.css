@@ -23,6 +23,7 @@ body{
     position:absolute; z-index:2;
 }
 .main-content{
+
     position:absolute;
     top: 130px;
     left: 350px;
@@ -87,9 +88,15 @@ form.main-searchbox input{
     margin-left:-8px;
 
 }
-.main-content #drop-taglist{
+.main-content{
+
+    flex-direction: column;
+    align-items: center;
+
+}
+#drop-taglist{
     /*서치버튼 클릭시 태그 리스트창 */
-    position: relative;
+    position:relative;
     background-color: #fff;
     border-width:1px;
     border-style:solid;
@@ -98,8 +105,21 @@ form.main-searchbox input{
     padding:15px 15px 15px 15px;
     box-shadow: 2px 5px 5px 3px rgba(0,1,3,.1);
 
-
 }
+#drop{
+    /*서치버튼 클릭시 태그 리스트창 */
+
+
+    width:460px;
+    background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #afacac;
+    border-radius: 6px;
+    padding: 15px 15px 15px 15px;
+    box-shadow: 2px 5px 5px 3px rgba(0, 1, 3, .1);
+}
+
 .taglist-notice p{
     font-size:12px;
     line-height: 130%;
@@ -107,7 +127,9 @@ form.main-searchbox input{
     font-weight: bold;
 
 }
+.taglist-bottom{
 
+}
 .taglist-bottom .tag-btn{
     font-size:15px;
     margin:5px;
@@ -130,6 +152,17 @@ form.main-searchbox input{
     background-color: #e8e8e8;
     color: #828282;
 }
+
+.orange2{
+    background-color: #ffaa00;
+    color:white;
+}
+
+.gray2{
+    background-color: #e8e8e8;
+    color: #828282;
+}
+
 
 .bottom-container{
     display:flex;
@@ -178,20 +211,20 @@ input[type='checkbox'] { display:none; }
 
 /* Default styling for labels to make them look like buttons */
 input[type='checkbox'] + label {
-  display:inline-block;
-  box-shadow:1px 1px grey;
-  border-radius:3px;
-  background-color:#e0e0e0;
-  padding:5px;
-  font-family:Arial, Helvetica, sans-serif;
-  cursor:pointer;
+    display:inline-block;
+    box-shadow:1px 1px grey;
+    border-radius:3px;
+    background-color:#e0e0e0;
+    padding:5px;
+    font-family:Arial, Helvetica, sans-serif;
+    cursor:pointer;
+}
+input[type='checkbox']:checked + label {
+    box-shadow:-1px -1px grey;
+    background-color:#f78d32;
 }
 
 /* Styling for labels when corresponding checkbox is checked */
-input[type='checkbox']:checked + label {
-  box-shadow:-1px -1px grey;
-  background-color:#f78d32;
-}
 
 .custom {
     margin:2px;
